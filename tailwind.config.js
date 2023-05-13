@@ -7,6 +7,7 @@ export default {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        "./node_modules/flowbite/**/*.js"
     ],
 
     theme: {
@@ -15,7 +16,17 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
+        colors: {
+            'kuning': '#fcd34d',
+            'oranye': '#f97316',
+            'hijaut': '#4ade80',
+            'hijaum': '#86efac',
+            'abu': '#64748b',
+        },
     },
 
-    plugins: [forms],
+    plugins: [
+        require('flowbite/plugin'),
+        require("daisyui")
+    ],
 };
