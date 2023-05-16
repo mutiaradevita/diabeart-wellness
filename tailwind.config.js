@@ -14,17 +14,17 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                'bebas': ['Bebas Neue', 'sans-serif']
             },
         },
         colors: {
             'kuning': '#fcd34d',
             'kuningt': '#d97706',
             'oranye': '#f97316',
-            'oranyet': '#c2410c',
+            'oranyet': '#b45309',
             'hijau': '#a3e635',
             'hijaut': '#4ade80',
             'abu': '#64748b',
-            'hijaum': '#69B550',
         },
     },
 
