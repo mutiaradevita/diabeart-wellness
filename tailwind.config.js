@@ -14,6 +14,8 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                'bebas': ['Bebas Neue', 'sans-serif'],
+                'montserrat': ['Montserrat', 'sans-serif'],
             },
         },
         colors: {
@@ -22,7 +24,7 @@ export default {
             'oranye': '#f97316',
             'oranyet': '#c2410c',
             'hijau': '#a3e635',
-            'hijaut': '#4ade80',
+            'hijaut': '#16a34a',
             'abu': '#64748b',
             'hijaum': '#69B550',
         },
