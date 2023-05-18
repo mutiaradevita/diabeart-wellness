@@ -22,11 +22,10 @@ export default {
             'kuning': '#fcd34d',
             'kuningt': '#d97706',
             'oranye': '#f97316',
-            'oranyet': '#c2410c',
+            'oranyet': '#b45309',
             'hijau': '#a3e635',
             'hijaut': '#16a34a',
             'abu': '#64748b',
-            'hijaum': '#69B550',
         },
     },
 
