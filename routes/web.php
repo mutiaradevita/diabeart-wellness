@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/home', function(){
-    return view('tesDio');
+    return view('home');
 });
 
 require __DIR__.'/auth.php';
