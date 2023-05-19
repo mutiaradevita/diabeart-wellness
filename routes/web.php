@@ -32,4 +32,8 @@ Route::get('/home', function(){
     return view('home');
 });
 
+Route::get('/ulasan', function () {
+    return view('ulasan');
+});
+
 require __DIR__.'/auth.php';
