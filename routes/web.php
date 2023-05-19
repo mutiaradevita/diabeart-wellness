@@ -31,8 +31,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/home',[HomeController::class, 'index'])->name('home');
 
-Route::get('/about', 'HomeController@about')->name('about');
+Route::get('/about',[HomeController::class, 'about'])->name('about');
 
-Route::get('/ulasan', 'HomeController@ulasan')->name('ulasan');
+Route::get('/ulasan', [HomeController::class, 'ulasan'])->name('ulasan');
 
 require __DIR__.'/auth.php';
