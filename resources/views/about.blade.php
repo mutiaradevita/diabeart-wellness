@@ -1,76 +1,81 @@
 <x-guest-layout>
     <div class="grid h-auto bg-kuning w-screen overflow-y-auto">
         <div class="mt-32 tracking-[.45em]">
-            <h1 class="text-[55px] text-oranye font-bebas px-5">ABOUT US</h1>
+            <h1 class="text-[60px] text-oranye font-bebas px-5">ABOUT US</h1>
         </div>
         <div>
-            <p class="text-base font-montserrat px-5 text-justify">Kami memahami betapa sulitnya untuk mencari makanan yang
+            <p class="text-[25px] font-montserrat px-5 text-justify">Kami memahami betapa sulitnya untuk mencari makanan yang
                 aman untuk dikonsumsi bagi penderita jantung dan diabetes. Selain itu, tentu penting bagi mereka untuk
-                menyesuaikan konsumsi makanan guna mencegah dampak yang lebih parah dari penyakit yang ada.</p>
+                menyesuaikan konsumsi makanan guna mencegah dampak yang lebih parah dari penyakit yang ada.</p><br>
             {{-- <p class="text-white text-[30px] mx-[30px] lg:mx-[130px] xl:mx-[140px] leading-loose mt-8 font-bebas">Sign up and discover a great amount of new apportunities!</p> --}}
-            <p class="text-base font-montserrat px-5 text-justify">Oleh karena itu, Diabeart Wellness hadir sebagai solusi
-                terbaik, sebagai platform penyedia menu makanan sehat bagi penderita penyakit jantung dan diabetes. Kami
+            <p class="text-[25px] font-montserrat px-5 text-justify">Oleh karena itu, <b>Diabeart Wellness hadir sebagai solusi
+                terbaik</b>, sebagai platform penyedia menu makanan sehat bagi penderita penyakit jantung dan diabetes. Kami
                 hadir dengan menawarkan beragam menu makanan sehat yang terbuat dari bahan-bahan alami dan
                 diformulasikan secara khusus dengan takaran gizi yang telah disesuaikan — B2SA (Beragam, Bergizi, Sehat,
                 dan Aman).</p>
-            <hr class="my-6 border-black sm:mx-auto dark:border-black lg:my-8 w-5/6 bg-black" />
+            <hr class="my-10 border-black sm:mx-auto dark:border-black lg:my-8 w-5/6 bg-black" />
         </div>
         <div>
-            <h1 class="text-[55px] text-oranye font-bebas px-5">The Beggining of Diabeart Wellness</h1>
+            <h1 class="text-[60px] text-oranye font-bebas px-5">The Beggining of <br> Diabeart Wellness</h1>
         </div>
         <div class="px-5">
             <ol class="relative border-l border-black dark:border-black">
                 <li class="mb-10 ml-4">
                     <div
-                        class="absolute w-3 h-3 bg-hijau rounded-full mt-1.5 -left-1.5 border border-hijau dark:border-hijau dark:bg-hijau">
+                        class="absolute w-3 h-3 bg-hijauab rounded-full mt-1.5 -left-1.5 border border-hijau dark:border-hijau dark:bg-hijau">
                     </div>
-                    <p class="mb-4 text-base font-montserrat text-gray-500 dark:text-gray-400">Adanya permasalahan tentang
+                    <p class="mb-4 text-[22px] text-justify font-montserrat text-black-500 dark:text-black-400">Adanya permasalahan tentang
                         kasus penyakit jantung dan diabetes yang memperparah kondisi kesehatan penderitanya hingga
                         menyebabkan kematian.</p>
                 </li>
                 <li class="mb-10 ml-4">
                     <div
-                        class="absolute w-3 h-3 bg-hijau rounded-full mt-1.5 -left-1.5 border border-hijau dark:border-hijau dark:bg-hijau">
+                        class="absolute w-3 h-3 bg-hijauab rounded-full mt-1.5 -left-1.5 border border-hijau dark:border-hijau dark:bg-hijau">
                     </div>
-                    <p class="text-base font-montserrat text-gray-500 dark:text-gray-400">Timbul keinginan untuk memberikan
+                    <p class="text-[22px] text-justify font-montserrat text-black-500 dark:text-black-400">Timbul keinginan untuk memberikan
                         solusi yang dapat membantu mengurangi dampak kesehatan menurun akibat dari penyakit jantung dan
                         diabetes.</p>
                 </li>
                 <li class="mb-10 ml-4">
                     <div
-                        class="absolute w-3 h-3 bg-hijau rounded-full mt-1.5 -left-1.5 border border-hijau dark:border-hijau dark:bg-hijau">
+                        class="absolute w-3 h-3 bg-hijauab rounded-full mt-1.5 -left-1.5 border border-hijau dark:border-hijau dark:bg-hijau">
                     </div>
-                    <p class="text-base font-montserrat text-gray-500 dark:text-gray-400">Adanya client penyedia jasa
+                    <p class="text-[22px] text-justify font-montserrat text-black-500 dark:text-black-400">Adanya client penyedia jasa
                         catering makanan yang menjual makanan dengan konsep yang sejalan dengan ide kami, yakni menjual
                         makanan sehat dengan menu yang gizinya sudah disesuaikan untuk penderita penyakit jantung dan
                         diabetes.</p>
                 </li>
                 <li class="mb-10 ml-4">
                     <div
-                        class="absolute w-3 h-3 bg-hijau rounded-full mt-1.5 -left-1.5 border border-hijau dark:border-hijau dark:bg-hijau">
+                        class="absolute w-3 h-3 bg-hijauab rounded-full mt-1.5 -left-1.5 border border-hijau dark:border-hijau dark:bg-hijau">
                     </div>
-                    <p class="text-base font-montserrat text-gray-500 dark:text-gray-400">Research dan Pengembangan Ide.</p>
+                    <p class="text-[22px] text-justify font-montserrat text-black-500 dark:text-black-400">Research dan Pengembangan Ide.</p>
                 </li>
                 <li class="mb-10 ml-4">
                     <div
-                        class="absolute w-3 h-3 bg-hijau rounded-full mt-1.5 -left-1.5 border border-hijau dark:border-hijau dark:bg-hijau">
+                        class="absolute w-3 h-3 bg-hijauab rounded-full mt-1.5 -left-1.5 border border-hijau dark:border-hijau dark:bg-hijau">
                     </div>
-                    <p class="text-base font-semibold text-gray-500 dark:text-gray-400">Hadir ‘Diabeart Wellness’.</p>
+                    <p class="text-[22px] text-justify font-montserrat font-semibold text-black-500 dark:text-black-400">Hadir ‘Diabeart Wellness’.</p>
                 </li>
             </ol>
             <hr class="my-6 border-black sm:mx-auto dark:border-black lg:my-8 w-5/6 bg-black" />
         </div>
         <div>
-            <h1 class="text-[55px] text-oranye font-bebas px-5">TUJUAN KAMI</h1>
+            <h1 class="text-[60px] text-oranye font-bebas px-5">TUJUAN KAMI</h1>
         </div>
-        <p class="text-base font-bold text-gray-500 dark:text-gray-400 px-5">Membantu para penderita penyakit jantung dan diabetes untuk mengatur makanan yang dikonsumsi.</p>
-        <div class="w-80 h-[218px] bg-[url('../../public/img/about1.png')] bg-cover mt-10 p-2 rounded-r-3xl font-bebas text-3xl tracking-[.10em] ">
+        <p class="text-[30px] text-justify font-bold text-black-500 dark:text-black-400 px-5">Membantu para penderita penyakit jantung dan diabetes untuk mengatur makanan yang dikonsumsi.</p>
+        <div class="w-[500px] h-[350px] bg-[url('../../public/img/about1.png')] bg-cover mt-10 p-2 rounded-r-3xl font-bebas text-3xl tracking-[.10em] ">
         </div>
-        <p class="text-base font-bold text-gray-500 dark:text-gray-400 px-5 pt-5">Menyediakan beragam menu makanan sehat untuk membantu mengatur pola makan dari penderita penyakit jantung dan diabetes.</p>
-        <div class="w-80 h-[218px] bg-[url('../../public/img/about2.png')] bg-cover mt-10 p-2 rounded-r-3xl font-bebas text-3xl tracking-[.10em] "></div>
-            <p class="text-base font-bold text-gray-500 dark:text-gray-400 px-5 pt-5">Kunjungi outlet kami dan rasakan pengalaman membeli secara langsung.</p>
-            <div class="w-80 h-[218px] bg-[url('../../public/img/about3.png')] bg-cover mt-10 p-2 rounded-r-3xl font-bebas text-3xl tracking-[.10em] mb-10">
+        <p class="text-[30px] text-justify font-bold text-black-500 dark:text-black-400 px-5 pt-5">Menyediakan beragam menu makanan sehat untuk membantu mengatur pola makan dari penderita penyakit jantung dan diabetes.</p>
+        <div class="w-[500px] h-[350px] bg-[url('../../public/img/about2.png')] bg-cover mt-10 p-2 rounded-r-3xl font-bebas text-3xl tracking-[.10em] "></div>
+            <p class="text-[30px] text-justify font-bold text-black-500 dark:text-black-400 px-5 pt-5">Kunjungi outlet kami dan rasakan pengalaman membeli secara langsung.</p>
+            <div class="w-[500px] h-[350px] bg-[url('../../public/img/about3.png')] bg-cover mt-10 p-2 rounded-r-3xl font-bebas text-3xl tracking-[.10em] mb-10">
         </div>
+        <div class="flex">
+        <div class="w-[85px] h-[90px] bg-[url('../../public/img/lokasi.png')] bg-cover mt-5 p-2 rounded-r-3xl font-bebas text-3xl tracking-[.10em] mb-10">
+        </div>
+        <p class="text-[20px] text-justify text-black-500 dark:text-black-400 px-5 pt-5">Jl. Soekarno Hatta No.9, Jatimulyo, <br>Kec. Lowokwaru, Kota Malang, <br>Jawa Timur 65141</p>
+    </div>
     </div>
 
     {{-- Contact Us Page --}}

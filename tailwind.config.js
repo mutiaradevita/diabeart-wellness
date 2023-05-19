@@ -26,6 +26,7 @@ export default {
             'hijau': '#a3e635',
             'hijaut': '#16a34a',
             'abu': '#64748b',
+            'hijauab': '#69b550',
         },
     },
 
