@@ -2,11 +2,11 @@
     <div class="grid w-full h-max flex-grow bg-kuning pt-14">
         <div class="relative bg-[url('../../public/img/bg-makanan.jpg')] bg-cover bg-center ">
             <div class="flex w-full h-full bg-gray-900 bg-opacity-20">
-                <div class="grid w-4/12 h-full bg-oranye p-2 rounded-r-full font-bebas text-3xl tracking-[.10em] items-center">
-                    <div class="text-white pl-1">
-                        KETAHUI <a class="text-oranyet">BAHAYA</a> 
-                        PENYAKIT JANTUNG 
-                        DAN DIABETES
+                <div class="grid w-4/12 h-full bg-oranye p-2 rounded-r-full font-bebas text-5xl tracking-[.10em] items-center">
+                    <div class="text-white pl-1 text-center">
+                        APA KATA MEREKA?
+                        <br>
+                        <a class="text-3xl tracking-[.05em]">Ulasan Produk Kami</a>
                     </div>
                 </div>
                 <div class="w-4/12 grid gap-2 mt-3 mb-3 ml-6">
@@ -127,11 +127,11 @@
         </a> --}}
 
         </div>
-        <div class="grid w-full h-screen bg-gray-900 place-content-center text-6xl tracking-[.10em]">
+        <div class="grid w-full h-screen bg-gray-600 place-content-center text-6xl tracking-[.10em]">
             <div class="text-white text-center">
                 TUNGGU APA LAGI?
-                <div class="text-abu bg-sky-700 hover:bg-sky-700">
-                <a href="#" class="h-fit w-fit p-1 bg-white text-5xl">ORDER SEKARANG</a>
+                <div class="text-black mt-10">
+                <a href="#" class="h-fit w-fit p-2 text-4xl rounded-2xl bg-kuning hover:bg-gray-800 hover:text-white ">ORDER SEKARANG</a>
                 </div>
             </div>
             
