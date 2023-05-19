@@ -51,7 +51,7 @@
         <div class="lg:tracking-[.30em] xl:tracking-[.45em]">
             <h1 class="text-[55px] text-kuning font-bebas lg:mx-[60px] xl:mx-[100px]">ALREADY HAVE ACCOUNT ?</h1>
             <p class="text-white text-[30px] mx-[30px] lg:mx-[130px] xl:mx-[140px] leading-loose mt-8 font-bebas">Improve your health, shop your healthy food now! enjoy!</p>
-            <a href="{{ route('register') }}"><button type="button" class="text-black bg-kuning hover:bg-oranye ring-2 ring-oranyet focus:ring-4 focus:outline-none focus:ring-oranyet font-medium rounded-full text-sm px-9 py-2 mt-16 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log in</button></a>
+            <a href="{{ route('login') }}"><button type="button" class="text-black bg-kuning hover:bg-oranye ring-2 ring-oranyet focus:ring-4 focus:outline-none focus:ring-oranyet font-medium rounded-full text-sm px-9 py-2 mt-16 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log in</button></a>
         </div>
     </div>
 </x-guest-layout>
