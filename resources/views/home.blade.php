@@ -1,12 +1,10 @@
 <x-home-layout>
-    <div class="flex w-full h-screen">
-        <div class="p-6 text-gray-900 absolute">
-            {{ __("You're logged in!") }}
+    <div class="grid w-full h-[135vh] bg-kuning pt-14">
+        <div class="bg-[url('../../public/img/FoodPresentation.png')] grid bg-cover items-center ">
+            <div class="absolute w-48 h-14 bg-oranye grid items-center ml-48 mt-96 rounded-full drop-shadow-2xl">
+                <a href="#" class="font-montserrat text-white text-center ">ORDER NOW</a>
+            </div>
         </div>
-        <div class="w-9/12 bg-kuning"></div>
-        <div class="w-4/12 bg-oranye"></div>
-        
-            
     </div>
         <div class="grid w-full h-screen bg-hijaut font-bebas place-content-center text-6xl tracking-[.10em]">
             <div class="text-kuning text-center">
@@ -57,7 +55,7 @@
         </div>
         <div class="grid w-full h-screen flex-grow bg-kuning">
             <div class="relative">
-                <img src="{{ asset('img/image5.svg') }}" class="absolute w-52 h-auto top-0 right-0 m-5" alt="gambar">
+                <img src="{{ asset('img/image16.png') }}" class="absolute w-52 h-auto top-0 right-0 m-5" alt="gambar">
                 <div class="w-fit h-fit bg-white mt-10 ml-5 p-px rounded-3xl">
                     <img src="{{ asset('img/kemenkesLogo.svg') }}" class="w-36 h-auto m-5" alt="gambar">
                 </div>
