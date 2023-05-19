@@ -32,11 +32,11 @@ Route::middleware('auth')->group(function () {
 Route::get('/home',[HomeController::class, 'index'])->name('home');
 
 Route::get('/about', function(){
-    return view('about')->name('about');
+    return view('about');
 });
 
 Route::get('/ulasan', function () {
-    return view('ulasan')->name('ulasan');
+    return view('ulasan');
 });
 
 require __DIR__.'/auth.php';
