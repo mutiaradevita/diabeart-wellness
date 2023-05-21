@@ -29,8 +29,7 @@
                 <li>
                     <a href="#" class="block py-2 pl-3 pr-4 text-gray-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-900 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline underline-offset-4">Keranjang</a>
                 </li>
-                <a href="{{ route('login') }}"><button type="button" class="text-black bg-kuning hover:bg-oranye hover:ring-oranyet ring-2 ring-oranye focus:ring-4 focus:outline-none focus:ring-oranyet font-medium rounded-full text-sm px-8 py-1 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log in</button></a>
-                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                @if (Auth::check())
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -53,16 +52,18 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
                 </x-dropdown>
-            </div>
-            </ul>
+                @else
+                <a href="{{ route('login') }}"><button type="button" class="text-black bg-kuning hover:bg-oranye hover:ring-oranyet ring-2 ring-oranye focus:ring-4 focus:outline-none focus:ring-oranyet font-medium rounded-full text-sm px-8 py-1 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log in</button></a>
+                @endif
         </div>
+        </ul>
+    </div>
     </div>
 </nav>
