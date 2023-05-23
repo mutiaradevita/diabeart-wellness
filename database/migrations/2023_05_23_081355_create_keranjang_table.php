@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->integer('jumlah')->nullable();
             $table->integer('total_harga')->nullable();
-            $table->unsignedBigInteger('id_produk')->nullable();
-            $table->foreign('id_produk')->references('id')->on('produk');
         });
     }
 

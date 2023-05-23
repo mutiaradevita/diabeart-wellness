@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('kategori', function (Blueprint $table) {
             $table->id();
             $table->string('nama_kategori')->nullable();
-            $table->unsignedBigInteger('id_produk')->nullable();
-            $table->foreign('id_produk')->references('id')->on('produk');
         });
     }
 
