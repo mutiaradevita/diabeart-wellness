@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('protein')->nullable();
             $table->string('kalori')->nullable();
             $table->string('serat')->nullable();
-            $table->unsignedBigInteger('id_kategori')->nullable();
-            $table->foreign('id_kategori')->references('id')->on('kategori');
         });
     }
 

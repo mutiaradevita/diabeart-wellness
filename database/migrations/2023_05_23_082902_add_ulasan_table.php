@@ -15,11 +15,6 @@ return new class extends Migration
             $table->id();
             $table->integer('rating')->nullable();
             $table->string('komentar')->nullable();
-            $table->unsignedBigInteger('id_user')->nullable();
-            $table->unsignedBigInteger('id_produk')->nullable();
-            $table->foreign('id_user')->references('id')->on('user');
-            $table->foreign('id_produk')->references('id')->on('produk');
-            
         });
     }
 
