@@ -35,4 +35,7 @@ Route::get('/about',[HomeController::class, 'about'])->name('about');
 
 Route::get('/ulasan', [HomeController::class, 'ulasan'])->name('ulasan');
 
+Route::get('/kategori', [HomeController::class, 'kategori'])->name('kategori');
+
+
 require __DIR__.'/auth.php';

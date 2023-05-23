@@ -33,4 +33,8 @@ class HomeController extends Controller
     public function ulasan(){
         return view('ulasan');
     }
+
+    public function kategori(){
+        return view('kategori');
+    }
 }
