@@ -30,4 +30,8 @@ class Produk extends Model
     {
         return $this->belongsToMany(Kategori::class, 'kategori_produk');
     }
+
+    public function keranjang(){
+        return $this->hasMany(Keranjang::class);
+    }
 }
