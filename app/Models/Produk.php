@@ -34,4 +34,8 @@ class Produk extends Model
     public function keranjang(){
         return $this->hasMany(Keranjang::class);
     }
+
+    public function ulasan(){
+        return $this->hasMany(Ulasan::class);
+    }
 }

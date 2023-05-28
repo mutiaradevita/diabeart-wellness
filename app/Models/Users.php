@@ -31,4 +31,8 @@ class Users extends Model
     public function ulasan(){
         return $this->hasOne(Ulasan::class);
     }
+
+    public function transaksi(){
+        return $this->hasMany(Transaksi::class);
+    }
 }

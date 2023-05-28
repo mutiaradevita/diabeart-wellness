@@ -5,17 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Keranjang extends Model
+class Ulasan extends Model
 {
-    protected $table = "keranjang";
     use HasFactory;
+
+    protected $table = 'ulasan';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'id',
-        'jumlah',
-        'total_harga',
+        'rating',
+        'komentar',
+        'id_users',
         'id_produk',
-        'id_user'
     ];
 
     public function user()
@@ -28,9 +30,5 @@ class Keranjang extends Model
         return $this->belongsTo(Produk::class);
     }
 
-    public function transaksi()
-    {
-        return $this->belongsToMany(Transaksi::class, 'keranjang_transaksi');
-    }
-    
+
 }
