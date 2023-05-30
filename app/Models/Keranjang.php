@@ -20,12 +20,17 @@ class Keranjang extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Users::class);
     }
 
     public function produk()
     {
         return $this->belongsTo(Produk::class);
+    }
+
+    public function transaksi()
+    {
+        return $this->belongsToMany(Transaksi::class, 'keranjang_transaksi');
     }
     
 }
