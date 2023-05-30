@@ -3,6 +3,11 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\UlasanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,13 +34,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/home',[HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/about',[HomeController::class, 'about'])->name('about');
+Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
 
-Route::get('/ulasan', [HomeController::class, 'ulasan'])->name('ulasan');
+Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 
-Route::get('/kategori', [HomeController::class, 'kategori'])->name('kategori');
+Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan');
 
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 
-require __DIR__.'/auth.php';
+Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang');
+
+require __DIR__ . '/auth.php';
