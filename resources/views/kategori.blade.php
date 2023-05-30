@@ -23,6 +23,12 @@
                     <div class="absolute justify-self-center bg-white rounded-full w-[130px] h-[130px] top-[30px]"></div>
                 </div>
             </a>
+            <a href="#">
+                <div class="grid bg-gray-100 w-[200px] h-[300px] hover:bg-gray-200 shadow-lg rounded-3xl">
+                    <div class="absolute justify-self-center bg-white rounded-full w-[130px] h-[130px] top-[30px]"></div>
+                </div>
+            </a>
+            
         </div>
     </div>
 

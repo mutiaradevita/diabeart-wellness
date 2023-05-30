@@ -31,7 +31,4 @@ class Transaksi extends Model
         return $this->belongsToMany(Keranjang::class, 'keranjang_transaksi');
     }
 
-
-
-
 }
