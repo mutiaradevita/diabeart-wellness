@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Kategori;
 
 class Produk extends Model
 {
@@ -17,6 +18,7 @@ class Produk extends Model
         'id',
         'nama',
         'gambar',
+        'deskripsi',
         'harga',
         'komposisi',
         'karbo',
@@ -28,7 +30,7 @@ class Produk extends Model
 
     public function kategori()
     {
-        return $this->belongsToMany(Kategori::class, 'kategori_produk');
+        return $this->belongsToMany(Kategori::class, 'kategori_produk', 'id_kategori', 'id_produk');
     }
 
     public function keranjang(){
