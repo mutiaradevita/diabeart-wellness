@@ -37,5 +37,9 @@ Route::get('/ulasan', [HomeController::class, 'ulasan'])->name('ulasan');
 
 Route::get('/kategori', [HomeController::class, 'kategori'])->name('kategori');
 
+Route::get('/keranjang', function () {
+    return view('keranjang');
+});
+
 
 require __DIR__.'/auth.php';
