@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Users;
+use App\Models\Produk;
+use App\Models\Keranjang;
 
 class Transaksi extends Model
 {
@@ -30,8 +33,4 @@ class Transaksi extends Model
     {
         return $this->belongsToMany(Keranjang::class, 'keranjang_transaksi');
     }
-
-
-
-
 }

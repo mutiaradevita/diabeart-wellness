@@ -12,6 +12,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $users = Auth::user();
         if (Auth::id()) {
             $usertype = Auth()->user()->usertype;
 
@@ -22,19 +23,7 @@ class HomeController extends Controller
             }
 
         } else {
-            return view('home');
+            return view('home', ['users'=>$users]);
         }
-    }
-
-    public function about(){
-        return view('about');
-    }
-
-    public function ulasan(){
-        return view('ulasan');
-    }
-
-    public function kategori(){
-        return view('kategori');
-    }
+    } 
 }
