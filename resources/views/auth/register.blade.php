@@ -2,7 +2,7 @@
     <div class="grid h-[115vh] bg-kuning w-screen">
         <img src="{{asset('img/logo.png')}}" alt="Diabeart logo" class="absolute w-[18rem] pt-6 justify-self-center">
         <h1 class="absolute top-[260px] md:top-[240px] lg:top-[230px] xl:top-[265px] text-[45px] lg:text-[55px] font-medium justify-self-center font-bebas text-oranye tracking-wide">HI, WELCOME</h1>
-        <div class="absolute place-self-end justify-self-center px-6 pt-7 md:px-7 md:pt-7 md: lg:px-10 lg:pb-[165px] lg:pt-10 bg-hijauab overflow-hidden rounded-t-[40px] w-[20rem] h-[25rem] md:w-[30rem] md:h-[28rem] lg:w-[31rem] lg:h-[28rem] xl:h-[30rem]" style="background-color: rgba(0, 128, 0, 0.3);">
+        <div class="absolute place-self-end justify-self-center px-6 pt-7 md:px-7 md:pt-7 md: lg:px-10 lg:pb-[165px] lg:pt-10 bg-hijauab overflow-hidden rounded-t-[40px] w-[20rem] h-[34rem] md:w-[33rem] md:h-[36rem] lg:w-[37rem] lg:h-[38rem] xl:h-[40rem]" style="background-color: rgba(0, 128, 0, 0.3);">
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
@@ -16,6 +16,18 @@
                 <div class="mt-4">
                     <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="Email"/>
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                </div>
+
+                <!-- No Handphone -->
+                <div class="mt-4">
+                    <x-text-input id="no_hp" class="block mt-1 w-full" type="text" name="no_hp" :value="old('no_hp')" required autocomplete="no_hp" placeholder="No Handphone"/>
+                    <x-input-error :messages="$errors->get('no_hp')" class="mt-2" />
+                </div>
+
+                <!-- Address -->
+                <div class="mt-4">
+                    <x-text-input id="alamat" class="block mt-1 w-full" type="text" name="alamat" :value="old('alamat')" required autocomplete="alamat" placeholder="Address"/>
+                    <x-input-error :messages="$errors->get('alamat')" class="mt-2" />
                 </div>
 
                 <!-- Password -->

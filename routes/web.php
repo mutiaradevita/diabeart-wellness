@@ -46,4 +46,5 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang');
 
+
 require __DIR__ . '/auth.php';
