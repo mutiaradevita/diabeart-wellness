@@ -10,7 +10,7 @@
             </svg>
         </button>
         <div class="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
-            <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+            <ul class="flex flex-col font-medium items-center rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
                 <li>
                     <a href="{{route('home')}}" class="block py-2 pl-3 pr-4 text-gray-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-900 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline underline-offset-4">Home</a>
                 </li>
@@ -29,11 +29,16 @@
                 <li>
                     <a href="{{route('keranjang')}}" class="block py-2 pl-3 pr-4 text-gray-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-900 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline underline-offset-4">Keranjang</a>
                 </li>
+
                 @if (Auth::check())
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <img class="w-10 h-10 rounded-full" src="https://icon-library.com/images/default-profile-icon/default-profile-icon-16.jpg" alt="">
+                            @if(Auth::user()->image_user)
+                            <img class="w-10 rounded-full" src="{{Auth::user()->image_user}}" alt="">
+                            @else
+                            <img class="w-10 rounded-full" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="">
+                            @endif
                         </button>
                     </x-slot>
 
