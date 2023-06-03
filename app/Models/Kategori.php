@@ -20,6 +20,6 @@ class Kategori extends Model
     ];
 
     public function produk(){
-        return $this->belongsToMany(Produk::class, 'kategori_produk', 'id_kategori', 'id_produk');
+        return $this->belongsToMany(Produk::class, 'kategori_produk', 'id_produk', 'id_kategori');
     }
 }
