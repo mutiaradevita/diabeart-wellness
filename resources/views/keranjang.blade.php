@@ -10,6 +10,7 @@
               <label for="select-all-checkbox" class="ml-2 text-xl font-medium text-gray-900 dark:text-gray-300 pl-3">Pilih semua</label>
           </div>
 
+          @foreach ($Keranjang as $item)
           <div class="flex items-center pb-4">
               <input type="checkbox" value="" class="default-checkbox w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
               <div class="flex w-full h-fit bg-white rounded-2xl p-5 ml-5">
@@ -17,14 +18,14 @@
                       <img class="w-30 h-30 rounded-2" src="{{ asset('img/HealthyBox.svg') }}" alt="profile picture">
                   </figcaption>   
                   <div class="grid p-3 w-full">
-                      <a class="text-xl content-center">Nama Barang</a>
-                      <a class="text-bold">Rp 99999999999999</a>
+                      <a class="text-xl content-center">{{$item->produk->nama}}</a>
+                      <a class="text-bold">{{$item->produk->harga}}</a>
                       <div class="grid justify-items-stretch ">
                           <div class="flex justify-self-end">
                           <button class="tambah pr-2">
                               <img src="{{asset('img/Plus.png')}}" alt="Tambah" />
                           </button>
-                          <span class="quantity text-lg pt-1">1</span>
+                          <span class="quantity text-lg pt-1">{{$item->jumlah}}</span>
                           <button class="kurang pl-2">
                               <img src="{{asset('img/Minus.png')}}" alt="Kurangi" />
                           </button>
@@ -36,6 +37,7 @@
                   <img src="{{asset('img/Bin.png')}}" alt="Hapus" />
               </button>
           </div>
+          @endforeach
 
       </div>
 
