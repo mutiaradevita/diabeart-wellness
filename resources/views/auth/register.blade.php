@@ -2,7 +2,7 @@
     <div class="grid h-[150vh] bg-kuning w-screen">
         <img src="{{asset('img/logo.png')}}" alt="Diabeart logo" class="absolute w-[18rem] pt-6 justify-self-center">
         <h1 class="absolute top-[260px] md:top-[240px] lg:top-[230px] xl:top-[265px] text-[45px] lg:text-[55px] font-medium justify-self-center font-bebas text-oranye tracking-wide">HI, WELCOME</h1>
-        <div class="absolute place-self-end justify-self-center px-6 pt-5 md:px-7 md:pt-5 md: lg:px-10 lg:pb-[165px] lg:pt-8 bg-hijauab overflow-hidden rounded-t-[40px] w-[20rem] h-[28rem] md:w-[30rem] md:h-[30rem] lg:w-[31rem] lg:h-[32rem] xl:h-[34rem]" style="background-color: rgba(0, 128, 0, 0.3);">
+        <div class="absolute place-self-end justify-self-center px-6 pt-5 md:px-7 md:pt-5 md: lg:px-10 lg:pb-[165px] lg:pt-8 bg-hijauab overflow-hidden rounded-t-[40px] w-[20rem] h-[30rem] md:w-[30rem] md:h-[33rem] lg:w-[31rem] lg:h-[33rem] xl:h-[35rem]" style="background-color: rgba(0, 128, 0, 0.3);">
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
