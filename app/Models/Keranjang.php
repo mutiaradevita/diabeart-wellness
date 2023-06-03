@@ -15,7 +15,7 @@ class Keranjang extends Model
         'jumlah',
         'total_harga',
         'id_produk',
-        'id_user'
+        'id_user',
     ];
 
     public function user()

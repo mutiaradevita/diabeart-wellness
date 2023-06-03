@@ -45,10 +45,6 @@ Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 
 Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan');
 
-Route::get('/keranjang', function () {
-    return view('keranjang');
-});
-
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang');

@@ -36,91 +36,33 @@
                 </button>
             </div>
 
-            <div class="flex items-center pb-4">
-                <input type="checkbox" value="" class="default-checkbox w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <div class="flex w-full h-fit bg-white rounded-2xl p-5 ml-5">
-                    <figcaption class="flex items-center space-x-3">
-                        <img class="w-30 h-30 rounded-2" src="{{ asset('img/HealthyBox.svg') }}" alt="profile picture">
-                    </figcaption>   
-                    <div class="grid p-3 w-full">
-                        <a class="text-xl content-center">Nama Barang</a>
-                        <a class="text-bold">Rp 99999999999999</a>
-                        <div class="grid justify-items-stretch ">
-                            <div class="flex justify-self-end">
-                            <button class="tambah pr-2">
-                                <img src="{{asset('img/Plus.png')}}" alt="Tambah" />
-                            </button>
-                            <span class="quantity text-lg pt-1">1</span>
-                            <button class="kurang pl-2">
-                                <img src="{{asset('img/Minus.png')}}" alt="Kurangi" />
-                            </button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="hapus bg-white ml-2 p-3 rounded-2xl">
-                    <img src="{{asset('img/Bin.png')}}" alt="Hapus" />
-                </button>
-            </div>
-
-            <div class="flex items-center pb-4">
-                <input type="checkbox" value="" class="default-checkbox w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <div class="flex w-full h-fit bg-white rounded-2xl p-5 ml-5">
-                    <figcaption class="flex items-center space-x-3">
-                        <img class="w-30 h-30 rounded-2" src="{{ asset('img/HealthyBox.svg') }}" alt="profile picture">
-                    </figcaption>   
-                    <div class="grid p-3 w-full">
-                        <a class="text-xl content-center">Nama Barang</a>
-                        <a class="text-bold">Rp 99999999999999</a>
-                        <div class="grid justify-items-stretch ">
-                            <div class="flex justify-self-end">
-                            <button class="tambah pr-2">
-                                <img src="{{asset('img/Plus.png')}}" alt="Tambah" />
-                            </button>
-                            <span class="quantity text-lg pt-1">1</span>
-                            <button class="kurang pl-2">
-                                <img src="{{asset('img/Minus.png')}}" alt="Kurangi" />
-                            </button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="hapus bg-white ml-2 p-3 rounded-2xl">
-                    <img src="{{asset('img/Bin.png')}}" alt="Hapus" />
-                </button>
-            </div>
-
-            <div class="flex items-center pb-4">
-                <input type="checkbox" value="" class="default-checkbox w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <div class="flex w-full h-fit bg-white rounded-2xl p-5 ml-5">
-                    <figcaption class="flex items-center space-x-3">
-                        <img class="w-30 h-30 rounded-2" src="{{ asset('img/HealthyBox.svg') }}" alt="profile picture">
-                    </figcaption>   
-                    <div class="grid p-3 w-full">
-                        <a class="text-xl content-center">Nama Barang</a>
-                        <a class="text-bold">Rp 99999999999999</a>
-                        <div class="grid justify-items-stretch ">
-                            <div class="flex justify-self-end">
-                            <button class="tambah pr-2">
-                                <img src="{{asset('img/Plus.png')}}" alt="Tambah" />
-                            </button>
-                            <span class="quantity text-lg pt-1">1</span>
-                            <button class="kurang pl-2">
-                                <img src="{{asset('img/Minus.png')}}" alt="Kurangi" />
-                            </button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="hapus bg-white ml-2 p-3 rounded-2xl">
-                    <img src="{{asset('img/Bin.png')}}" alt="Hapus" />
-                </button>
-            </div>
-
         </div>
 
         <div class="w-3/12 h-80 mt-32  bg-white sticky top-24 ml-12 rounded-2xl">
-            <a class="">hhhhhhhhhhhhh</a>
+            <div class="p-3 text-center text-2xl">
+                Ringkasan Belanja
+            </div>
+            <div class="flex">
+                <div class="pl-10 pr-10 pt-3">
+                    <a class="tes">Total harga</a>
+                    <br>
+                    <a class="tes2">Ongkir</a>
+                    <div class="pt-20 text-bold">
+                        <a class="tes3">Total Harga</a>
+                    </div>
+                </div>
+                <div class="pl-10 pr-10 pt-3">
+                    <a class="tes">99999999999</a>
+                    <br>
+                    <a class="">99999999</a>
+                    <div class="pt-20 text-bold">
+                        <a class="tes3">99999999</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid place-items-center mt-10">
+                <button type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">Checkout</button>
+            </div>
         </div>
     </div>
 </x-home-layout>
