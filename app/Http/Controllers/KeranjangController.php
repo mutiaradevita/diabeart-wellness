@@ -10,8 +10,11 @@ class KeranjangController extends Controller
 {
     public function index(Request $request){
         $user = Auth::user();
-        $Keranjang = Keranjang::where('id_users', $user->id)->get();
-        // $Keranjang = Keranjang::all();
-        return view('keranjang', compact('Keranjang'));
+        if($user != null){
+            $Keranjang = Keranjang::where('id_users', $user->id)->get();
+            return view('keranjang', compact('Keranjang'));
+        } else{
+            return view('keranjang');
+        }
     }
 }
