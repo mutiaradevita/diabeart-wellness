@@ -8,6 +8,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\UlasanController;
+use App\Http\Controllers\DetailProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
+
+Route::get('/produk/{nama}', [DetailProdukController::class, 'index'])->name('detail');
 
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 
