@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::table('transaksi', function (Blueprint $table) {
             $table->unsignedBigInteger('id_users')->nullable();
             $table->unsignedBigInteger('id_produk')->nullable();
-            $table->unsignedBigInteger('id_keranjang')->nullable();
             $table->foreign('id_users')->references('id')->on('users');
             $table->foreign('id_produk')->references('id')->on('produk');
-            $table->foreign('id_keranjang')->references('id')->on('keranjang');
 
         });
     }
