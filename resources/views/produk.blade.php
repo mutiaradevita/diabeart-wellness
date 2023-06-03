@@ -4,18 +4,18 @@
         <h3 class="absolute font-bebas text-oranyet top-[200px] text-[40px] justify-self-center tracking-[.20em]">Healthy Lifestyle Meal Plan</h3>
         <div class="relative w-fit h-fit mx-auto grid grid-cols-4 gap-y-14 gap-x-14 top-[290px]">
             @foreach($produk as $Produk)
-            <a href="#" class="mt-6">
+            <a href="{{route('detail', $Produk->nama)}}" class="mt-6">
                 <div class="grid bg-gray-100 w-[300px] h-[370px] hover:bg-gray-200 shadow-lg rounded-2xl duration-500 hover:scale-105 hover:shadow-2xl">
                     <img src="{{$Produk->gambar}}" alt="produk" class="object-cover h-60 rounded-t-2xl">
                     <div class="px-6 py-3">
                         @foreach($Produk->kategori as $p)
-                        <span class="text-gray-400 text-xs">{{$p->nama_kategori ?? 'None'}}</span>
+                        <span class="text-gray-400 text-xs">{{$p->nama_kategori ?? 'None'}} </span>
                         @endforeach
                         <p class="text-lg font-bold text-black truncate block capitalize">{{$Produk->nama}}</p>
                         <div class="flex items-center">
                             <p class="text-lg font-semibold text-black cursor-auto my-3">Rp {{$Produk->harga}}</p>
                             <del>
-                                <p class="text-sm text-gray-600 cursor-auto ml-2">Rp 1.000.000</p>
+                                <p class="text-sm text-gray-600 cursor-auto ml-2">Rp 1000000</p>
                             </del>
                             <div class="ml-auto"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
