@@ -33,7 +33,7 @@
                       </div>
                   </div>
               </div>
-              <button class="hapus bg-white ml-2 p-3 rounded-2xl">
+              <button class="hapus bg-white ml-2 p-3 rounded-2xl" data-id="{{ $item->id }}">
                   <img src="{{asset('img/Bin.png')}}" alt="Hapus" />
               </button>
           </div>
@@ -134,7 +134,21 @@
   for (let i = 0; i < deleteButtons.length; i++) {
     deleteButtons[i].addEventListener('click', function() {
       const item = this.parentNode;
-      item.remove();
+      let itemId = $(this).data('id');
+      let token   = $("meta[name='csrf-token']").attr("content");
+      $.ajax({
+
+        url: `/keranjang/${itemId}`,
+        type: "DELETE",
+        cache: false,
+        data: {
+          "_token": token
+        },
+        success:function(response){ 
+          item.remove();
+        }
+      });
+      
     });
   }
 </script>

@@ -17,4 +17,15 @@ class KeranjangController extends Controller
             return view('keranjang');
         }
     }
+
+    public function destroy($id)
+    {
+        Keranjang::where('id', $id)->delete();
+
+        //return response
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil Dihapus!.',
+        ]);
+    }
 }

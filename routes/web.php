@@ -48,6 +48,6 @@ Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang');
-
+Route::delete('/keranjang/{id}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
 
 require __DIR__ . '/auth.php';
