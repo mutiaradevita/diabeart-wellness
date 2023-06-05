@@ -18,6 +18,13 @@
         @method('patch')
 
         <div>
+            <x-input-label for="image_user" :value="__('Profile Photo')" />
+            <input id="image_user" name="image_user" type="file" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+            :value="old('image_user', $user->image_user)" required autofocus autocomplete="image_user">
+            <x-input-error class="mt-2" :messages="$errors->get('image_user')" />
+        </div>
+        
+        <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
@@ -45,6 +52,18 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        <div>
+            <x-input-label for="no_hp" :value="__('No Handphone')" />
+            <x-text-input id="no_hp" name="no_hp" type="text" class="mt-1 block w-full" :value="old('no_hp', $user->no_hp)" required autofocus autocomplete="no_hp" />
+            <x-input-error class="mt-2" :messages="$errors->get('no_hp')" />
+        </div>
+
+        <div>
+            <x-input-label for="alamat" :value="__('Address')" />
+            <x-text-input id="alamat" name="alamat" type="text" class="mt-1 block w-full" :value="old('alamat', $user->alamat)" required autofocus autocomplete="alamat" />
+            <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
         </div>
 
         <div class="flex items-center gap-4">
