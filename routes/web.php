@@ -10,6 +10,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\DetailProdukController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TransaksiController;
 
 /*
@@ -27,11 +28,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard.dashboard');
-})->middleware(['auth', 'admin'])->name('dashboard');
+Route::middleware('auth', 'admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard.dashboard');
+    Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard.user');
+    Route::get('/dashboard/product', [AdminController::class, 'product'])->name('dashboard.product');
+});
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'user')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -42,6 +45,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
 
 Route::get('/produk/{nama}', [DetailProdukController::class, 'index'])->name('detail');
+
+Route::post('/produk/create/{harga}/{idproduk}/{iduser}', [DetailProdukController::class, 'create'])->name('storeProduk');
 
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 

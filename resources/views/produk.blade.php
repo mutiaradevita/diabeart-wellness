@@ -4,7 +4,7 @@
         <h3 class="absolute font-bebas text-oranyet top-[200px] text-[40px] justify-self-center tracking-[.20em]">Healthy Lifestyle Meal Plan</h3>
         <div class="relative w-fit h-fit mx-auto grid grid-cols-4 gap-y-14 gap-x-14 top-[290px]">
             @foreach($produk as $Produk)
-            <a href="{{route('detail', $Produk->nama)}}" class="mt-6">
+            <a href="{{route('detail', ['nama' => $Produk->nama])}}" class="mt-6">
                 <div class="grid bg-gray-100 w-[300px] h-[370px] hover:bg-gray-200 shadow-lg rounded-2xl duration-500 hover:scale-105 hover:shadow-2xl">
                     <img src="{{$Produk->gambar}}" alt="produk" class="object-cover h-60 rounded-t-2xl">
                     <div class="px-6 py-3">
