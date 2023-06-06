@@ -13,4 +13,14 @@ class Kategori_Produk extends Model
     protected $fillable = ['id_kategori', 'id_produk'];
     protected $primaryKey = 'id';
     public $incrementing = false;
+
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class, 'id_produk');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'id_kategori');
+    }
 }

@@ -10,8 +10,7 @@ class DetailProdukController extends Controller
 {
     public function index($nama){
         $detail = Produk::where('nama', $nama)->first();
-        $jumlah = 1;
-        return view('detail', compact('detail', 'jumlah'));
+        return view('detail', compact('detail'));
     }
 
     public function create(Request $request, $harga, $idproduk, $iduser){
