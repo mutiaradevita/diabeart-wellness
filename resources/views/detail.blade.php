@@ -31,13 +31,20 @@
                     <div class="grow"></div>
                     <div class="grid grid-cols-2">
                         <p class="font-bebas text-black text-[25px] tracking-[.20em] self-center">Rp {{$detail->harga}}</p>
-                        <form action="{{ route('storeProduk', ['harga' => $detail->harga, 'idproduk' => $detail->id, 'iduser' => Auth::user()->id])  }}" method="POST" class="place-self-end">
+                        <form action="{{ route('storeProduk', ['harga' => $detail->harga, 'idproduk' => $detail->id, 'iduser' => Auth::check() ? Auth::user()->id : 0])  }}" method="POST" class="place-self-end">
                             @csrf
                             @method('POST')
                             <input type="hidden" id="data" name="jumlah" value="1">
+                            @if(Auth::check())
                             <button type="submit" class="focus:outline-none text-sm text-white bg-oranye hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded-md text-xl px-5 py-2.5 font-bebas tracking-[.20em]">
                                 Add to cart
                             </button>
+                            @else
+                            <p class="mt-3 font-bebas text-oranye text-[15px] tracking-[.20em]">Anda harus Login</p>
+                            <button type="button" class="focus:outline-none text-sm text-white bg-oranye hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded-md text-xl px-5 py-2.5 font-bebas tracking-[.20em] cursor-not-allowed">
+                                Add to cart
+                            </button>
+                            @endif
                         </form>
                     </div>
                 </div>

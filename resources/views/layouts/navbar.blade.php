@@ -1,4 +1,4 @@
-<nav class="fixed w-full border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 drop-shadow-lg z-10">
+<nav class="fixed w-full border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 drop-shadow-lg z-40">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" class="flex items-center">
             <img src="{{asset('img/logobg.png')}}" class="absolute mr-3 w-[120px]" alt="Diabeart Logo" />

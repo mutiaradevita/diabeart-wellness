@@ -2,18 +2,19 @@
     <div class="grid w-full bg-kuning h-[200vh]">
         <h1 class="absolute font-bebas text-white top-[100px] text-[70px] justify-self-center tracking-[.20em]">Pilihan Makanan Sehat</h1>
         <h3 class="absolute font-bebas text-oranyet top-[200px] text-[40px] justify-self-center tracking-[.20em]">Healthy Lifestyle Meal Plan</h3>
+        @if($produk->isEmpty())
+        <h1 class="absolute justify-self-center top-[450px] font-bebas text-black text-[50px] justify-self-center tracking-[.20em]">Tidak ada makanan dalam kategori</h1>
+        @else
         <div class="relative w-fit h-fit mx-auto grid grid-cols-4 gap-y-14 gap-x-14 top-[290px]">
             @foreach($produk as $Produk)
-            <a href="{{route('detail', ['nama' => $Produk->nama])}}" class="mt-6">
+            <a href="{{route('detail', ['nama' => $Produk->Produk->nama])}}" class="mt-6">
                 <div class="grid bg-gray-100 w-[300px] h-[370px] hover:bg-gray-200 shadow-lg rounded-2xl duration-500 hover:scale-105 hover:shadow-2xl">
-                    <img src="{{$Produk->gambar}}" alt="produk" class="object-cover h-60 rounded-t-2xl">
+                    <img src="{{$Produk->Produk->gambar}}" alt="produk" class="object-cover h-60 rounded-t-2xl">
                     <div class="px-6 py-3">
-                        @foreach($Produk->kategori as $p)
-                        <span class="text-gray-400 text-xs">{{$p->nama_kategori ?? 'None'}} </span>
-                        @endforeach
-                        <p class="text-lg font-bold text-black truncate block capitalize">{{$Produk->nama}}</p>
+                        <span class="text-gray-400 text-xs">{{$Produk->Kategori->nama_kategori ?? 'None'}} </span>
+                        <p class="text-lg font-bold text-black truncate block capitalize">{{$Produk->Produk->nama}}</p>
                         <div class="flex items-center">
-                            <p class="text-lg font-semibold text-black cursor-auto my-3">Rp {{$Produk->harga}}</p>
+                            <p class="text-lg font-semibold text-black cursor-auto my-3">Rp {{$Produk->Produk->harga}}</p>
                             <del>
                                 <p class="text-sm text-gray-600 cursor-auto ml-2">Rp 1000000</p>
                             </del>
@@ -29,6 +30,7 @@
             </a>
             @endforeach
         </div>
+        @endif
     </div>
 
 </x-home-layout>
