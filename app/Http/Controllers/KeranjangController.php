@@ -11,8 +11,16 @@ class KeranjangController extends Controller
     public function index(Request $request){
         $user = Auth::user();
         if($user != null){
-            $Keranjang = Keranjang::where('id_users', $user->id)->get();
-            return view('keranjang', compact('Keranjang'));
+            $Keranjang = Keranjang::where('id_users', $user->id)->where('status', 'process')->get();
+            $totalSemua = 0;
+            foreach ($Keranjang as $keranjang) {
+                // Lakukan tindakan pada setiap produk
+                $totalPrice = $keranjang->total_harga;
+                $totalSemua = $totalSemua + $totalPrice;
+            }
+
+
+            return view('keranjang', compact('Keranjang', 'totalSemua'));
         } else{
             return view('keranjang');
         }
