@@ -44,6 +44,8 @@ Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
 
 Route::get('/produk/{nama}', [DetailProdukController::class, 'index'])->name('detail');
 
+Route::post('/produk/create/{harga}/{idproduk}/{iduser}', [DetailProdukController::class, 'create'])->name('storeProduk');
+
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 
 Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan');
