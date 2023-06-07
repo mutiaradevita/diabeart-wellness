@@ -15,9 +15,13 @@ class DetailProdukController extends Controller
 
     public function create(Request $request, $harga, $idproduk, $iduser){
         $jumlah = $request->get('jumlah');
+        $status = $request->get('status');
+        $catatan = $request->get('catatan');
         $keranjang = new Keranjang;
         $keranjang->jumlah = $jumlah;
         $keranjang->total_harga = $harga * $jumlah;
+        $keranjang->catatan = $catatan;
+        $keranjang->status = $status;
         $keranjang->id_produk = $idproduk;
         $keranjang->id_users = $iduser;
         $keranjang->save();
