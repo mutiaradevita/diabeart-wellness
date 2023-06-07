@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::table('keranjang', function (Blueprint $table) {
             $table->unsignedBigInteger('id_produk')->nullable();
             $table->foreign('id_produk')->references('id')->on('produk');
+            $table->unsignedBigInteger('id_transaksi')->nullable();
+            $table->foreign('id_transaksi')->references('id')->on('transaksi');
         });
     }
 
@@ -24,6 +26,7 @@ return new class extends Migration
     {
         Schema::table('keranjang', function (Blueprint $table) {
             $table->dropForeign(['id_produk']);
+            $table->dropForeign(['id_transaksi']);
         });
     }
 };

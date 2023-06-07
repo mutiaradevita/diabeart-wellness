@@ -1,5 +1,7 @@
 <x-home-layout>
   @auth
+  @if ($Keranjang && count($Keranjang) > 0)
+      
   <div class="flex w-full min-h-screen h-max bg-kuning pt-14 pl-24 pr-24">
       <div class="w-7/12 mt-10 ml-10">
           <div class="font-bebas text-4xl text-white pb-12">
@@ -53,6 +55,12 @@
           </div>
       </div>
   </div>
+  @else
+    <div class="grid w-full min-h-screen h-max bg-kuning pt-20 pl-24 pr-24 place-items-center place-content-center font-bebas text-4xl text-gray-500">
+      <a>Wah, keranjang kamu kosong nih!</a>
+      <a>ayo belanja sekarang!</a>
+    </div>
+  @endif
   @else
   <div class="grid w-full min-h-screen h-max bg-kuning pt-14 pl-24 pr-24 place-items-center place-content-center font-bebas text-4xl">
       <a>hey, sebelum mengakses menu keranjang, kamu harus login dulu ya!</a>
