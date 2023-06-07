@@ -13,15 +13,15 @@ class Transaksi extends Model
     use HasFactory;
 
     protected $table = 'transaksi';
+    public $timestamps = false;
     protected $primaryKey = 'id';
 
     protected $fillable = [
         'id',
         'tanggal',
         'metode_pembayaran',
-        'id_users',
-        'id_produk',
-        'id_keranjang',
+        'users',
+        'alamat',
     ];
 
     public function user()
@@ -31,6 +31,6 @@ class Transaksi extends Model
 
     public function keranjang()
     {
-        return $this->belongsToMany(Keranjang::class, 'keranjang_transaksi');
+        return $this->belongsToMany(Keranjang::class, 'keranjang_transaksi','id_transaksi', 'id_keranjang');
     }
 }

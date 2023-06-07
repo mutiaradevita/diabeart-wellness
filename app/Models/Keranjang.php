@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Keranjang extends Model
 {
     protected $table = "keranjang";
+    public $timestamps = false;
     use HasFactory;
 
     protected $fillable = [
@@ -30,7 +31,7 @@ class Keranjang extends Model
 
     public function transaksi()
     {
-        return $this->belongsToMany(Transaksi::class, 'keranjang_transaksi');
+        return $this->belongsToMany(Transaksi::class, 'keranjang_transaksi','id_keranjang', 'id_transaksi');
     }
     
 }

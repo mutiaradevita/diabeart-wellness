@@ -7,9 +7,11 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\DetailProdukController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +44,11 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
 
+Route::get('/produk/kategori/{kategori}', [ProdukController::class, 'kategori'])->name('produk_kategori');
+
 Route::get('/produk/{nama}', [DetailProdukController::class, 'index'])->name('detail');
+
+Route::post('/produk/create/{harga}/{idproduk}/{iduser}', [DetailProdukController::class, 'create'])->name('storeProduk');
 
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 
@@ -50,7 +56,12 @@ Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan');
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
+Route::get('/keranjang/checkout', [CheckoutController::class, 'index'])->name('checkout');
+
 Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang');
 Route::delete('/keranjang/{id}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
+
+Route::get('/keranjang/checkout/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
+Route::post('/keranjang/checkout/transaksi', [TransaksiController::class, 'create'])->name('transaksi.create');
 
 require __DIR__ . '/auth.php';
