@@ -12,10 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('keranjang', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_produk')->nullable();
-            $table->foreign('id_produk')->references('id')->on('produk');
-            $table->unsignedBigInteger('id_transaksi')->nullable();
-            $table->foreign('id_transaksi')->references('id')->on('transaksi');
+            $table->string('catatan', 255)->after('total_harga')->nullable();
         });
     }
 
@@ -25,8 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('keranjang', function (Blueprint $table) {
-            $table->dropForeign(['id_produk']);
-            $table->dropForeign(['id_transaksi']);
+            $table->dropColumn('catatan');
         });
     }
 };
