@@ -43,7 +43,7 @@
                     <div class="grow"></div>
                     <div class="grid grid-cols-2">
                         <p class="font-bebas text-black text-[25px] tracking-[.20em] self-center" id="harga">Rp {{$detail->harga}}</p>
-                        <form action="{{ route('storeProduk', ['harga' => $detail->harga, 'idproduk' => $detail->id, 'iduser' => Auth::check() ? Auth::user()->id : 0])  }}" method="POST" class="place-self-end">
+                        <form action="{{ route('storeProduk', ['harga' => $detail->harga, 'idproduk' => $detail->id])  }}" method="POST" class="place-self-end">
                             @csrf
                             @method('POST')
                             <input type="hidden" id="data" name="jumlah" value="1">

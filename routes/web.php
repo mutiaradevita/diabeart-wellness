@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\AdminProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,7 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard.user');
     Route::post('/dashboard/user', [AdminUserController::class, 'store'])->name('user.store');
-    Route::get('/dashboard/product', [AdminController::class, 'product'])->name('dashboard.product');
+    Route::resource('dashboard/product', AdminProdukController::class);
 });
 
 Route::middleware('auth')->group(function () {
@@ -51,7 +52,7 @@ Route::get('/produk/kategori/{kategori}', [ProdukController::class, 'kategori'])
 
 Route::get('/produk/{nama}', [DetailProdukController::class, 'index'])->name('detail');
 
-Route::post('/produk/create/{harga}/{idproduk}/{iduser}', [DetailProdukController::class, 'create'])->name('storeProduk');
+Route::post('/produk/create/{harga}/{idproduk}', [DetailProdukController::class, 'create'])->name('storeProduk');
 
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 
