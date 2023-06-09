@@ -11,6 +11,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\DetailProdukController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminTransaksiController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\TransaksiController;
 
@@ -33,6 +34,8 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard.user');
     Route::get('/dashboard/product', [AdminController::class, 'product'])->name('dashboard.product');
+    Route::get('/dashboard/transaksi', [AdminTransaksiController::class, 'index'])->name('dashboard.transaksi');
+    Route::put('/dashboard/transaksi/{id}', [AdminTransaksiController::class, 'update'])->name('dashboard.transaksi.update');
 });
 
 Route::middleware('auth')->group(function () {
