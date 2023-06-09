@@ -11,6 +11,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\DetailProdukController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\TransaksiController;
 
 /*
@@ -63,5 +64,8 @@ Route::delete('/keranjang/{id}', [KeranjangController::class, 'destroy'])->name(
 
 Route::get('/keranjang/checkout/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
 Route::post('/keranjang/checkout/transaksi', [TransaksiController::class, 'create'])->name('transaksi.create');
+
+Route::get('/history', [HistoryController::class, 'index'])->name('history');
+Route::post('/history', [HistoryController::class, 'filter'])->name('history.filter');
 
 require __DIR__ . '/auth.php';
