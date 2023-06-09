@@ -11,6 +11,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\DetailProdukController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\AdminProdukController;
@@ -33,6 +34,7 @@ Route::get('/', function () {
 Route::middleware('auth', 'admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard.user');
+    Route::post('/dashboard/user', [AdminUserController::class, 'store'])->name('user.store');
     Route::resource('dashboard/product', AdminProdukController::class);
 });
 
