@@ -49,7 +49,7 @@ Route::get('/produk/kategori/{kategori}', [ProdukController::class, 'kategori'])
 
 Route::get('/produk/{nama}', [DetailProdukController::class, 'index'])->name('detail');
 
-Route::post('/produk/create/{harga}/{idproduk}/{iduser}', [DetailProdukController::class, 'create'])->name('storeProduk');
+Route::post('/produk/create/{harga}/{idproduk}', [DetailProdukController::class, 'create'])->name('storeProduk');
 
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 
