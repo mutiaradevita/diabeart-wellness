@@ -21,7 +21,8 @@ class AdminController extends Controller
     public function user()
     {
         $user = Auth::user();
-        return view('dashboard.user', compact('user'));
+        $user = User::all();
+        return view('dashboard.user', compact('user'), ['user' => $user]);
     }
 
     public function product()
@@ -29,7 +30,7 @@ class AdminController extends Controller
         $user = Auth::user();
         return view('dashboard.product', compact('user'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
