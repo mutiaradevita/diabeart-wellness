@@ -13,6 +13,7 @@ use App\Http\Controllers\DetailProdukController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\AdminProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,7 @@ Route::get('/', function () {
 Route::middleware('auth', 'admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard.user');
-    Route::get('/dashboard/product', [AdminController::class, 'product'])->name('dashboard.product');
+    Route::resource('dashboard/product', AdminProdukController::class);
 });
 
 Route::middleware('auth')->group(function () {
