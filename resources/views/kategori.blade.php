@@ -53,12 +53,11 @@
                 </span>
             </button>
         </div>
-
         <div class="relative w-fit h-fit mx-auto grid grid-cols-4 gap-y-14 gap-x-14 top-[140px]">
             @foreach($kategori as $Kategori)
             <a href="{{route('produk_kategori',$Kategori->nama_kategori)}}" class="mt-6">
                 <div class="grid bg-gray-100 w-[250px] h-[350px] hover:bg-gray-200 shadow-lg rounded-2xl duration-500 hover:scale-105 hover:shadow-2xl">
-                    <div class="justify-self-center bg-white rounded-full w-[130px] h-[130px] mt-10"></div>
+                    <img src="{{$Kategori->gambar}}" alt="kategori" class="justify-self-center bg-white rounded-full w-[170px] h-[170px] mt-10">
                     <div class="grid">
                         <p class="justify-self-center text-lg font-bold text-black truncate block capitalize">{{$Kategori->nama_kategori}}</p>
                     </div>
@@ -66,6 +65,7 @@
             </a>
             @endforeach
         </div>
-
-
 </x-home-layout>
+
+
+<!-- Modal toggle -->
