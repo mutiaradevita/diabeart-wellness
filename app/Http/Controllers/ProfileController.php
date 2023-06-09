@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -32,20 +30,6 @@ class ProfileController extends Controller
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
-        }
-
-        if ($request->hasFile('image_user')) {
-            // Hapus file gambar profil lama jika ada
-            if ($user->image_user && Storage::exists('public/' . $user->image_user)) {
-                Storage::delete('public/' . $user->image_user);
-            }
-
-            $file = $request->file('image_user');
-            $fileName = $file->getClientOriginalName();
-            $filePath = $file->storeAs('images', $fileName, 'public');
-
-            // Simpan nama file ke dalam kolom image_user pada tabel users
-            $user->image_user = $fileName;
         }
 
         $request->user()->save();
