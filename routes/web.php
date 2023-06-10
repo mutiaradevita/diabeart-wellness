@@ -39,6 +39,7 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::resource('dashboard/product', AdminProdukController::class);
     Route::get('/dashboard/transaksi', [AdminTransaksiController::class, 'index'])->name('dashboard.transaksi');
     Route::put('/dashboard/transaksi/{id}', [AdminTransaksiController::class, 'update'])->name('dashboard.transaksi.update');
+    Route::delete('/dashboard/transaksi/{id}', [AdminTransaksiController::class, 'destroy'])->name('dashboard.transaksi.destroy');
 });
 
 Route::middleware('auth')->group(function () {
