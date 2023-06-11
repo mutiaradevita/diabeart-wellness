@@ -33,6 +33,15 @@ class AdminTransaksiController extends Controller
         return redirect()->back();
     }
 
+    public function readKeranjang(Request $request){
+        $invoice = $request->input('invoice');
+        $transaksi = Transaksi::Where('invoice', $invoice)->first();
+        
+        $keranjang = $transaksi->keranjang;
+
+        return view('dashboard.transaksi.keranjang', compact('keranjang'));
+    }
+
     public function destroy($id)
     {
         $transaksi = Transaksi::findOrFail($id);

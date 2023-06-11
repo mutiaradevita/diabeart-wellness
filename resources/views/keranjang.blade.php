@@ -18,8 +18,13 @@
                       <a class="text-xl content-center">Nama : {{$item->produk->nama}}</a>
                       <a class="text-bold">Harga : Rp {{$item->produk->harga}}</a>
                       <a class="text-bold">Jumlah: {{$item->jumlah}}</a>
-                  </div>
+                      <div class="relative">
+                        <div class="absolute text-xs w-fit bottom-0 right-0">
+                          {{$item->catatan}}
+                        </div>
                       </div>
+                  </div>
+              </div>
               <button class="hapus bg-white ml-2 p-3 rounded-2xl" data-id="{{ $item->id }}" onclick="refreshPage()">
                   <img src="{{asset('img/Bin.png')}}" alt="Hapus" />
               </button>
