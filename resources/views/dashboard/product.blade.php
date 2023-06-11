@@ -94,10 +94,83 @@
                         {{ $produk->serat }}
                     </td>
                     <td class="px-6 py-4">
-                        <button data-modal-target="authentication-modal2" data-modal-toggle="authentication-modal1" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900 justify-content-end" type="button">
+                        <button data-modal-target="authentication-modal{{$produk->id}}" data-modal-toggle="authentication-modal{{$produk->id}}" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900 justify-content-end" type="button">
                             Edit
                         </button>
-                        <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                        <div id="authentication-modal{{$produk->id}}" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                            <form method="post" action="{{ route('product.update', $produk->id) }}" class="relative w-full max-w-md max-h-full" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <!-- Modal content -->
+                                <div class="relative bg-white rounded-lg shadow">
+                                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="authentication-modal{{$produk->id}}">
+                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="sr-only">Close modal</span>
+                                    </button>
+                                    <div class="px-6 py-6 lg:px-8">
+                                        <h3 class="mb-4 text-xl font-medium text-gray-900">Masukkan Data Produk</h3>
+                                        <div>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="nama">Nama</label>
+                                            <input type="text" name="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-2" value="{{$produk->nama}}">
+                                        </div>
+                                        <div class="field mb-4">
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="kategori">Kategori</label>
+                                            <div class="control">
+                                                @foreach ($kategori as $kat)
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="kategoris[]" value="{{ $kat->id }}" @if(in_array($kat->id, $produk->kategori->pluck('id')->toArray())) checked @endif>
+                                                    {{ $kat->nama_kategori }}
+                                                </label>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="gambar">Gambar</label>
+                                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mb-4" name="gambar" id="file_input" type="file" value="{{$produk->gambar}}">
+                                            <img src="{{asset('storage/'. $produk->gambar)}}" alt="gambar" class="w-[100px] mb-4">
+                                        </div>
+                                        <div>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="deskripsi">Deskripsi</label>
+                                            <input type="text" name="deskripsi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Deskripsi" value="{{$produk->deskripsi}}">
+                                        </div>
+                                        <div>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="harga">Harga</label>
+                                            <input type="text" name="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Harga" value="{{$produk->harga}}">
+                                        </div>
+                                        <div>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="komposisi">Komposisi</label>
+                                            <input type="text" name="komposisi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Komposisi" value="{{$produk->komposisi}}">
+                                        </div>
+                                        <div>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="karbo">Karbo</label>
+                                            <input type="text" name="karbo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Karbo" value="{{$produk->karbo}}">
+                                        </div>
+                                        <div>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="protein">Protein</label>
+                                            <input type="text" name="protein" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Protein" value="{{$produk->protein}}">
+                                        </div>
+                                        <div>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="kalori">Kalori</label>
+                                            <input type="text" name="kalori" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Kalori" value="{{$produk->kalori}}">
+                                        </div>
+                                        <div>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="serat">Serat</label>
+                                            <input type="text" name="serat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Serat" value="{{$produk->serat}}">
+                                        </div>
+                                        <button type="submit" class="w-full text-white bg-oranye hover:bg-oranyet focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" data-modal-hide="authentication-modal{{$produk->id}}">Simpan</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <form method="POST" action="{{ route('product.destroy', $produk->id) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900 justify-content-end" type="submit">
+                                Delete
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
@@ -106,9 +179,10 @@
     </div>
 </div>
 <div id="authentication-modal1" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <form method="post" action="{{ route('product.store') }}" class="relative w-full max-w-md max-h-full">
+    <form method="post" action="{{ route('product.store') }}" class="relative w-full max-w-md max-h-full" enctype="multipart/form-data">
         @csrf
         @method('POST')
+
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow">
             <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="authentication-modal1">
@@ -120,79 +194,53 @@
             <div class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl font-medium text-gray-900">Masukkan Data Produk</h3>
                 <div>
-                    <input type="text" name="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Nama Produk">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="nama">Nama</label>
+                    <input type="text" name="nama" class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5" placeholder="Nama Produk">
+                </div>
+                <div class="field mb-4">
+                    <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
+                    <div class="control">
+                        @foreach ($kategori as $kat)
+                        <label class="checkbox mr-2">
+                            <input type="checkbox" name="kategoris[]" value="{{ $kat->id }}">
+                            {{ $kat->nama_kategori }}
+                        </label>
+                        @endforeach
+                    </div>
                 </div>
                 <div>
-                    <input type="text" name="gambar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Gambar">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="gambar">Gambar</label>
+                    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mb-4" name="gambar" id="file_input" type="file">
                 </div>
                 <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="deskripsi">Deskripsi</label>
                     <input type="text" name="deskripsi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Deskripsi">
                 </div>
                 <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="harga">Harga</label>
                     <input type="text" name="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Harga">
                 </div>
                 <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="komposisi">Komposisi</label>
                     <input type="text" name="komposisi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Komposisi">
                 </div>
                 <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="karbo">Karbo</label>
                     <input type="text" name="karbo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Karbo">
                 </div>
                 <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="protein">Protein</label>
                     <input type="text" name="protein" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Protein">
                 </div>
                 <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="kalori">Kalori</label>
                     <input type="text" name="kalori" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Kalori">
                 </div>
                 <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="serat">Serat</label>
                     <input type="text" name="serat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Serat">
                 </div>
                 <button type="submit" class="w-full text-white bg-oranye hover:bg-oranyet focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" data-modal-hide="authentication-modal1">Simpan</button>
-            </div>
-        </div>
-    </form>
-</div>
-<div id="authentication-modal2" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <form method="post" action="{{ route('product.update', $produk->) }}" class="relative w-full max-w-md max-h-full">
-        @csrf
-        @method('POST')
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow">
-            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="authentication-modal2">
-                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                </svg>
-                <span class="sr-only">Close modal</span>
-            </button>
-            <div class="px-6 py-6 lg:px-8">
-                <h3 class="mb-4 text-xl font-medium text-gray-900">Masukkan Data Produk</h3>
-                <div>
-                    <input type="text" name="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Nama sss">
-                </div>
-                <div>
-                    <input type="text" name="gambar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Gambar">
-                </div>
-                <div>
-                    <input type="text" name="deskripsi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Deskripsi">
-                </div>
-                <div>
-                    <input type="text" name="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Harga">
-                </div>
-                <div>
-                    <input type="text" name="komposisi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Komposisi">
-                </div>
-                <div>
-                    <input type="text" name="karbo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Karbo">
-                </div>
-                <div>
-                    <input type="text" name="protein" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Protein">
-                </div>
-                <div>
-                    <input type="text" name="kalori" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Kalori">
-                </div>
-                <div>
-                    <input type="text" name="serat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Serat">
-                </div>
-                <button type="submit" class="w-full text-white bg-oranye hover:bg-oranyet focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" data-modal-hide="authentication-modal2">Simpan</button>
             </div>
         </div>
     </form>
