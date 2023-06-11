@@ -6,7 +6,7 @@
             @foreach($produk as $Produk)
             <a href="{{route('detail', ['nama' => $Produk->nama])}}" class="mt-6">
                 <div class="grid bg-gray-100 w-[300px] h-[370px] hover:bg-gray-200 shadow-lg rounded-2xl duration-500 hover:scale-105 hover:shadow-2xl">
-                    <img src="{{$Produk->gambar}}" alt="produk" class="object-cover h-60 rounded-t-2xl">
+                    <img src="{{asset('storage/'. $Produk->gambar)}}" alt="produk" class="object-cover h-[240px] w-[300px] rounded-t-2xl">
                     <div class="px-6 py-3">
                         @foreach($Produk->kategori as $p)
                         <span class="text-gray-400 text-xs">{{$p->nama_kategori ?? 'None'}} </span>
