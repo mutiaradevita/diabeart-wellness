@@ -4,15 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminUserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = User::all();
+        $user = User::where([
+            ['name', '!=', Null],
+            [function ($query) use ($request) {
+                if (($search = $request->search)) {
+                    $query->orWhere('name', 'LIKE', '%' . $search . '%')
+                        ->get();
+                }
+            }]
+        ])->paginate(15);
+        return view('dashboard.user', compact('user'));
     }
 
     /**
@@ -28,18 +39,15 @@ class AdminUserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'usertype' => 'required',
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'no_hp' => 'required',
-            'alamat' => 'required',
-        ]);
-
-        User::create($request->all());
-
-        return redirect()-> route('dashboard')->with('Success','User berhasil ditambahkan');
+        $user = new User;
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->no_hp = $request->get('no_hp');
+        $user->alamat = $request->get('alamat');
+        $user->password = Hash::make($request->password);
+        $user->usertype = $request->get('usertype');
+        $user->save();
+        return redirect()->route('user.index');
     }
 
     /**
@@ -53,9 +61,10 @@ class AdminUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request, $id)
     {
-        //
+
+
     }
 
     /**
@@ -63,17 +72,16 @@ class AdminUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'usertype' => 'required',
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'no_hp' => 'required',
-            'alamat' => 'required',
-        ]);
+        $user = User::findOrFail($id);
 
-        User::find($id)->update($request->all());
-        return redirect()-> route('dashboard.user')->with('Success','User berhasil ditambahkan');
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->no_hp = $request->get('no_hp');
+        $user->alamat = $request->get('alamat');
+        $user->password = Hash::make($request->password);
+        $user->usertype = $request->get('usertype');
+        $user->save();
+        return redirect()->route('user.index');
 
     }
 
@@ -82,7 +90,9 @@ class AdminUserController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return redirect()-> route('dashboard.user')->with('Success','User berhasil ditambahkan');
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('user.index');
     }
 }
