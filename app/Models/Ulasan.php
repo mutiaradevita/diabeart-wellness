@@ -22,12 +22,12 @@ class Ulasan extends Model
 
     public function user()
     {
-        return $this->belongsTo(Users::class);
+        return $this->belongsTo(Users::class, 'id_users');
     }
 
     public function produk()
     {
-        return $this->belongsTo(Produk::class);
+        return $this->belongsTo(Produk::class, 'id_produk');
     }
 
 
