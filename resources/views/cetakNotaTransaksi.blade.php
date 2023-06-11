@@ -4,8 +4,6 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-		<title>A simple, clean, and responsive HTML invoice template</title>
-
 		<!-- Favicon -->
 		<link rel="icon" href="./images/favicon.png" type="image/x-icon" />
 
@@ -173,7 +171,7 @@
 				@foreach ($transaksi->keranjang as $item)
                 <tr class="details">
 					<td>{{$item->produk->nama}}</td>
-					<td>{{$item->produk->harga}}</td>
+					<td>Rp {{$item->produk->harga}}</td>
 				</tr>
                 @endforeach
 
