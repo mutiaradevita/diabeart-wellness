@@ -1,5 +1,5 @@
 <x-home-layout>
-    <div class="grid w-full bg-kuning h-[210vh]">
+    <div class="grid w-full bg-kuning h-[280vh]">
         <h1 class="absolute font-bebas text-white top-[100px] text-[70px] justify-self-center tracking-[.20em]">Kategori makanan</h1>
         <h3 class="absolute font-bebas text-oranyet top-[200px] text-[40px] justify-self-center tracking-[.20em]">Food category</h3>
 

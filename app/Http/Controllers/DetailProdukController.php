@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Keranjang;
 use App\Models\Produk;
+use App\Models\Ulasan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +13,9 @@ class DetailProdukController extends Controller
     public function index($nama)
     {
         $detail = Produk::where('nama', $nama)->first();
-        return view('detail', compact('detail'));
+        $idproduk = $detail->id;
+        $ulasan = Ulasan::where('id_produk', $idproduk)->orderBy('rating', 'desc')->limit(5)->get();
+        return view('detail', compact('detail', 'ulasan'));
     }
 
     public function create(Request $request, $harga, $idproduk)
