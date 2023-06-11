@@ -4,7 +4,7 @@
             <h1 class="font-bebas text-white text-[50px] tracking-[.20em]">Product / {{$detail->nama ?? 'None'}}</h1>
             <hr class="h-2 bg-white">
             <div class="flex my-10">
-                <img src="{{$detail->gambar}}" alt="produk" class="object-cover h-[500px] w-[500px] rounded-2xl">
+                <img src="{{asset('storage/'. $detail->gambar)}}" alt="produk" class="object-cover h-[500px] w-[500px] rounded-2xl">
                 <div class="flex flex-col ml-10">
                     <div>
                         <h1 class="font-bebas text-white text-[60px] tracking-[.20em]">{{$detail->nama}}</h1>

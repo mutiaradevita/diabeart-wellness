@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produk;
+use App\Models\Kategori;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 
 class AdminProdukController extends Controller
@@ -13,16 +16,9 @@ class AdminProdukController extends Controller
      */
     public function index(Request $request)
     {
-        $produk = Produk::where([
-            ['nama', '!=', Null],
-            [function ($query) use ($request) {
-                if (($search = $request->search)) {
-                    $query->orWhere('nama', 'LIKE', '%' . $search . '%')
-                        ->get();
-                }
-            }]
-        ])->paginate(5);
-        return view('dashboard.product', compact('produk'));
+        $produk = Produk::paginate(5);
+        $kategori = Kategori::all();
+        return view('dashboard.product', compact('produk', 'kategori'));
     }
 
     /**
@@ -37,9 +33,13 @@ class AdminProdukController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->file('gambar')) {
+            $gambar = $request->file('gambar')->store('images', 'public');
+        }
+
         $produk = new Produk;
         $produk->nama = $request->get('nama');
-        $produk->gambar = $request->get('gambar');
+        $produk->gambar = $gambar;
         $produk->deskripsi = $request->get('deskripsi');
         $produk->harga = $request->get('harga');
         $produk->komposisi = $request->get('komposisi');
@@ -48,6 +48,13 @@ class AdminProdukController extends Controller
         $produk->kalori = $request->get('kalori');
         $produk->serat = $request->get('serat');
         $produk->save();
+
+        $kategoris = $request->get('kategoris');
+        foreach ($kategoris as $kat) {
+            $kats = Kategori::findOrFail($kat);
+            $produk->kategori()->attach($kats->id);
+            $kats->save();
+        }
         return redirect()->route('product.index');
     }
 
@@ -61,11 +68,24 @@ class AdminProdukController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request, $id)
+    public function edit(string $id)
     {
-        $produk = Produk::where('id', $id)->first();
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
+    {
+        $produk = Produk::findOrFail($id);
+
+        if ($produk->gambar && file_exists(storage_path('app/public/' . $produk->gambar))) {
+            Storage::delete('public/' . $produk->gambar);
+        }
+        $gambar = $request->file('gambar')->store('images', 'public');
+        $produk->gambar = $gambar;
+
         $produk->nama = $request->get('nama');
-        $produk->gambar = $request->get('gambar');
         $produk->deskripsi = $request->get('deskripsi');
         $produk->harga = $request->get('harga');
         $produk->komposisi = $request->get('komposisi');
@@ -74,21 +94,26 @@ class AdminProdukController extends Controller
         $produk->kalori = $request->get('kalori');
         $produk->serat = $request->get('serat');
         $produk->save();
-        return redirect()->route('product.index');
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
+        $kategoris = $request->get('kategoris');
+        $produk->kategori()->sync($kategoris);
+
+        return redirect()->route('product.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $produk = Produk::findOrFail($id);
+
+        // Detach all kategori
+        $produk->kategori()->detach();
+
+        // Delete the produk
+        $produk->delete();
+
+        return redirect()->route('product.index');
     }
 }
