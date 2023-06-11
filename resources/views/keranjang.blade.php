@@ -14,10 +14,15 @@
                   <figcaption class="flex items-center space-x-3">
                       <img class="w-30 h-30 rounded-2" src="{{ asset('img/HealthyBox.svg') }}" alt="profile picture">
                   </figcaption>   
-                  <div class="grid p-3 w-full">
+                  <div class="grid p-3 w-10/12">
                       <a class="text-xl content-center">Nama : {{$item->produk->nama}}</a>
-                      <a class="text-bold">Harga : {{$item->produk->harga}}</a>
+                      <a class="text-bold">Harga : Rp {{$item->produk->harga}}</a>
                       <a class="text-bold">Jumlah: {{$item->jumlah}}</a>
+                      <div class="relative">
+                        <div class="absolute text-xs w-fit bottom-0 right-0">
+                          {{$item->catatan}}
+                        </div>
+                      </div>
                   </div>
               </div>
               <button class="hapus bg-white ml-2 p-3 rounded-2xl" data-id="{{ $item->id }}" onclick="refreshPage()">
@@ -28,25 +33,25 @@
 
       </div>
 
-      <div class="w-3/12 min-h-80 h-fit mt-32  bg-white sticky top-24 ml-12 rounded-2xl p-2">
+      <div class="w-fit min-h-80 h-fit mt-32  bg-white sticky top-24 ml-12 rounded-2xl p-2">
           <div class="p-3 text-center text-2xl">
               Ringkasan Belanja
           </div>
           <div class="flex">
-              <div class="pl-10 pr-10 pt-3">
-                  <a class="tes">Total harga</a>
+              <div class="pl-10 pr-10 pt-3 whitespace-nowrap">
+                  <a>Total harga</a>
               </div>
               <div class="pl-10 pr-10 pt-3">
               @foreach ($Keranjang as $item)
-                <a class="tes">{{$item->total_harga}}</a>
+                <a class="tes">Rp {{$item->total_harga}} ({{$item->jumlah}} barang)</a>
                 <br>
               @endforeach
                 <br>
                 <a class="text-bold">Ongkir</a><br>
-                <a class="">6000</a>
+                <a class="">Rp 6000</a>
                 <div class="pt-2 text-bold">
-                  <hr class="w-32 h-px my-8 bg-black border-0 dark:bg-white">
-                  <a class="tes3">{{$totalSemua + 6000}}</a>
+                  <hr class="w-56 h-px my-8 bg-black border-0 dark:bg-white">
+                  <a class="tes3">Rp {{$totalSemua + 6000}}</a>
                 </div>               
               </div>
           </div>
@@ -57,7 +62,7 @@
   </div>
   @else
     <div class="grid w-full min-h-screen h-max bg-kuning pt-20 pl-24 pr-24 place-items-center place-content-center font-bebas text-4xl text-gray-500">
-      <a>Wah, keranjang kamu kosong nih!</a>
+      <a>Wah, keranjang kamu masih kosong nih!</a>
       <a>ayo belanja sekarang!</a>
     </div>
   @endif

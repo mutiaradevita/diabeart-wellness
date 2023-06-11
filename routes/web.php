@@ -12,6 +12,7 @@ use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\DetailProdukController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\AdminTransaksiController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\AdminProdukController;
@@ -36,6 +37,10 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard.user');
     Route::post('/dashboard/user', [AdminUserController::class, 'store'])->name('user.store');
     Route::resource('dashboard/product', AdminProdukController::class);
+    Route::get('/dashboard/transaksi', [AdminTransaksiController::class, 'index'])->name('dashboard.transaksi');
+    Route::get('/dashboard/transaksi/keranjang', [AdminTransaksiController::class, 'readKeranjang'])->name('dashboard.transaksi.keranjang');
+    Route::put('/dashboard/transaksi/{id}', [AdminTransaksiController::class, 'update'])->name('dashboard.transaksi.update');
+    Route::delete('/dashboard/transaksi/{id}', [AdminTransaksiController::class, 'destroy'])->name('dashboard.transaksi.destroy');
 });
 
 Route::middleware('auth')->group(function () {
@@ -70,5 +75,7 @@ Route::post('/keranjang/checkout/transaksi', [TransaksiController::class, 'creat
 
 Route::get('/history', [HistoryController::class, 'index'])->name('history');
 Route::post('/history', [HistoryController::class, 'filter'])->name('history.filter');
+
+Route::get('/cetak/cetak_pdf', [HistoryController::class, 'cetak'])->name('history.cetak');
 
 require __DIR__ . '/auth.php';
