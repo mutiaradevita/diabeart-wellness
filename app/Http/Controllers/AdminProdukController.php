@@ -16,7 +16,7 @@ class AdminProdukController extends Controller
      */
     public function index(Request $request)
     {
-        $produk = Produk::where([
+        $Produk = Produk::where([
             ['nama', '!=', Null],
             [function ($query) use ($request) {
                 if (($search = $request->search)) {
@@ -25,8 +25,13 @@ class AdminProdukController extends Controller
                 }
             }]
         ])->orderBy('nama', 'desc')->paginate(5);
+        // $currentPage = $produk->currentPage();
+        // $hasMorePages = $produk->hasMorePages();
+        // $nextPage = $produk->nextPageUrl();
+        // $prevPage = $produk->previousPageUrl();
+        
         $kategori = Kategori::all();
-        return view('dashboard.product', compact('kategori', 'produk'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('dashboard.product', compact('kategori', 'Produk'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
