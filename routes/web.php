@@ -34,8 +34,8 @@ Route::get('/', function () {
 
 Route::middleware('auth', 'admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard.user');
-    Route::post('/dashboard/user', [AdminUserController::class, 'store'])->name('user.store');
+    Route::resource('/dashboard/user', AdminUserController::class);
+    // Route::post('/dashboard/user', [AdminUserController::class, 'store'])->name('user.store');
     Route::resource('dashboard/product', AdminProdukController::class);
     Route::get('/dashboard/transaksi', [AdminTransaksiController::class, 'index'])->name('dashboard.transaksi');
     Route::get('/dashboard/transaksi/keranjang', [AdminTransaksiController::class, 'readKeranjang'])->name('dashboard.transaksi.keranjang');
@@ -62,6 +62,7 @@ Route::post('/produk/create/{harga}/{idproduk}', [DetailProdukController::class,
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 
 Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan');
+Route::post('/ulasan/create/{idproduk}', [UlasanController::class, 'create'])->name('ulasan.create');
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
