@@ -16,9 +16,17 @@ class AdminProdukController extends Controller
      */
     public function index(Request $request)
     {
-        $produk = Produk::paginate(5);
+        $produk = Produk::where([
+            ['nama', '!=', Null],
+            [function ($query) use ($request) {
+                if (($search = $request->search)) {
+                    $query->orWhere('nama', 'LIKE', '%' . $search . '%')
+                        ->get();
+                }
+            }]
+        ])->orderBy('nama', 'desc')->paginate(5);
         $kategori = Kategori::all();
-        return view('dashboard.product', compact('produk', 'kategori'));
+        return view('dashboard.product', compact('kategori', 'produk'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**

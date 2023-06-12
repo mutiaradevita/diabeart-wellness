@@ -7,13 +7,9 @@
         @if($transaksi->isEmpty())
         <h3 class="absolute font-bebas text-black top-[500px] text-[40px] justify-self-center tracking-[.20em]">Anda belum membeli produk</h3>
         @else
+        @foreach($transaksi as $trans)
+        @foreach($trans->keranjang as $ker)
         <div class="absolute w-fit h-fit grid grid-cols-1 justify-self-center gap-y-14 gap-x-14 top-[250px] mt-6">
-            @foreach($transaksi as $trans)
-            @foreach($trans->keranjang as $ker)
-            @php
-            $ulasanExists = \App\Models\Ulasan::where('id_users', Auth::user()->id)->where('id_produk', $ker->produk->id)->exists();
-            @endphp
-            @if(!$ulasanExists)
             <div class="flex w-[1200px] h-[200px] bg-white rounded-xl p-6 drop-shadow-lg mt-6">
                 <img src="{{asset('storage/'. $ker->produk->gambar)}}" alt="gambar" class="w-[140px] h-fit rounded-xl">
                 <p class="ml-4">{{$ker->produk->nama}}</p>
@@ -72,9 +68,6 @@
                     </form>
                 </div>
             </div>
-            @else
-            <h3 class="absolute font-bebas text-black top-[300px] text-[40px] justify-self-center tracking-[.20em]">Anda belum membeli produk</h3>
-            @endif
         </div>
         @endforeach
         @endforeach

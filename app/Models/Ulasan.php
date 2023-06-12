@@ -11,6 +11,7 @@ class Ulasan extends Model
 
     protected $table = 'ulasan';
     protected $primaryKey = 'id';
+    public $timestamps = false;
 
     protected $fillable = [
         'id',
