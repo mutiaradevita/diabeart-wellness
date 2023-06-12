@@ -144,7 +144,7 @@
                                 <div class="pl-5 pr-5 pb-4">
                                     <div class="flex w-full border-2 drop-shadow-sm h-fit bg-white rounded-lg p-5">
                                         <figcaption class="space-x-3">
-                                            <img class="w-30 h-30 rounded-2" src="{{ asset('img/HealthyBox.svg') }}" alt="profile picture">
+                                            <img src="{{asset('storage/'. $items->produk->gambar)}}" class="w-36 h-28 rounded-lg" alt="profile picture">
                                         </figcaption>   
                                         <div class="grid pl-3 w-full ">
                                             <a class="text-xl text-bold">{{$items->produk->nama}}</a>

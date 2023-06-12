@@ -59,7 +59,7 @@ use Carbon\Carbon;
             <div class="flex items-center pb-4">
                 <div class="flex w-10/12 h-fit bg-white rounded-2xl p-5">
                     <figcaption class="flex items-center space-x-3">
-                        <img class="w-30 h-30 rounded-2" src="{{ asset('img/HealthyBox.svg') }}" alt="profile picture">
+                        <img src="{{asset('storage/'. $item->produk->gambar)}}" class="w-36 h-28 rounded-lg" alt="profile picture">
                     </figcaption>
                     <div class="grid p-3 w-full">
                         <a class="text-xl content-center">Nama : {{$item->produk->nama}}</a>
