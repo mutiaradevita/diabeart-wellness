@@ -15,11 +15,8 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminTransaksiController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\TransaksiController;
-<<<<<<< HEAD
 use App\Http\Controllers\AdminReviewController;
-=======
 use App\Http\Controllers\AdminProdukController;
->>>>>>> c6a89b1443d43a77cfca983f21ed693ae0055a67
 
 /*
 |--------------------------------------------------------------------------
@@ -38,12 +35,10 @@ Route::get('/', function () {
 
 Route::middleware('auth', 'admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-<<<<<<< HEAD
     Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard.user');
     Route::get('/dashboard/product', [AdminController::class, 'product'])->name('dashboard.product');
     Route::get('/dashboard/review', [AdminReviewController::class, 'index'])->name('dashboard.review');
     Route::put('/dashboard/review/{id}', [AdminReviewController::class, 'update'])->name('dashboard.review.update');
-=======
     Route::resource('/dashboard/user', AdminUserController::class);
     // Route::post('/dashboard/user', [AdminUserController::class, 'store'])->name('user.store');
     Route::resource('dashboard/product', AdminProdukController::class);
@@ -51,7 +46,6 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::get('/dashboard/transaksi/keranjang', [AdminTransaksiController::class, 'readKeranjang'])->name('dashboard.transaksi.keranjang');
     Route::put('/dashboard/transaksi/{id}', [AdminTransaksiController::class, 'update'])->name('dashboard.transaksi.update');
     Route::delete('/dashboard/transaksi/{id}', [AdminTransaksiController::class, 'destroy'])->name('dashboard.transaksi.destroy');
->>>>>>> c6a89b1443d43a77cfca983f21ed693ae0055a67
 });
 
 Route::middleware('auth')->group(function () {
