@@ -21,10 +21,13 @@ export default {
         colors: {
             'kuning': '#fcd34d',
             'kuningt': '#d97706',
+            'kuningol': '#efb660',
+            'kuninghm': '#ffd021',
             'oranye': '#f97316',
             'oranyet': '#b45309',
             'hijau': '#a3e635',
             'hijaut': '#16a34a',
+            'hijauhv': '#7dd460',
             'abu': '#64748b',
             'hijauab': '#69b550',
         },
