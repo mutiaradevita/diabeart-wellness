@@ -41,6 +41,7 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::put('/dashboard/review/{id}', [AdminReviewController::class, 'update'])->name('dashboard.review.update');
     Route::get('/dashboard/review/detail/{id}', [AdminReviewController::class, 'show'])->name('dashboard.review.detail');
     Route::resource('/dashboard/user', AdminUserController::class);
+    Route::resource('/dashboard/review', AdminReviewController::class);
     // Route::post('/dashboard/user', [AdminUserController::class, 'store'])->name('user.store');
     Route::resource('dashboard/product', AdminProdukController::class);
     Route::get('/dashboard/transaksi', [AdminTransaksiController::class, 'index'])->name('dashboard.transaksi');
