@@ -14,7 +14,7 @@ class DetailProdukController extends Controller
     {
         $detail = Produk::where('nama', $nama)->first();
         $idproduk = $detail->id;
-        $ulasan = Ulasan::where('id_produk', $idproduk)->orderBy('rating', 'desc')->limit(5)->get();
+        $ulasan = Ulasan::where('id_produk', $idproduk)->orderBy('id', 'desc')->get();
         return view('detail', compact('detail', 'ulasan'));
     }
 
