@@ -34,7 +34,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth', 'admin')->prefix('dashboard')->group(function () {
+Route::middleware('auth', 'admin')->group(function () {
     Route::middleware('auth', 'admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard.user');
@@ -44,7 +44,7 @@ Route::middleware('auth', 'admin')->prefix('dashboard')->group(function () {
         Route::get('/dashboard/review/detail/{id}', [AdminReviewController::class, 'show'])->name('dashboard.review.detail');
         Route::resource('/dashboard/user', AdminUserController::class);
         Route::resource('/dashboard/review', AdminReviewController::class);
-        Route::resource('kategori', AdminKategoriController::class);
+        Route::resource('/dashboard/kategori', AdminKategoriController::class);
         Route::resource('dashboard/product', AdminProdukController::class);
         Route::get('/dashboard/transaksi', [AdminTransaksiController::class, 'index'])->name('dashboard.transaksi');
         Route::get('/dashboard/transaksi/keranjang', [AdminTransaksiController::class, 'readKeranjang'])->name('dashboard.transaksi.keranjang');
