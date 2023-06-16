@@ -29,7 +29,7 @@ class Users extends Model
     }
     
     public function ulasan(){
-        return $this->hasOne(Ulasan::class);
+        return $this->hasMany(Ulasan::class);
     }
 
     public function transaksi(){

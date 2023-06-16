@@ -1,11 +1,11 @@
 <x-home-layout>
-    <div class="grid w-full bg-kuning h-[150vh]">
-        <div class="my-24 mx-40">
+    <div class="flex w-full bg-kuning min-h-screen h-max">
+        <div class="mt-24 mx-auto">
             <h1 class="font-bebas text-white text-[50px] tracking-[.20em]">Product / {{$detail->nama ?? 'None'}}</h1>
             <hr class="h-2 bg-white">
             <div class="flex my-10">
-                <img src="{{$detail->gambar}}" alt="produk" class="object-cover h-[500px] w-[500px] rounded-2xl">
-                <div class="flex flex-col ml-10">
+                <img src="{{asset('storage/'. $detail->gambar)}}" alt="produk" class="object-cover h-[500px] w-[500px] rounded-2xl">
+                <div class="flex flex-col flex-1 ml-10">
                     <div>
                         <h1 class="font-bebas text-white text-[60px] tracking-[.20em]">{{$detail->nama}}</h1>
                         <p class="font-bebas text-black text-[20px] tracking-[.20em]">{{$detail->deskripsi}}</p>
@@ -106,9 +106,35 @@
                     <p class="font-bebas text-black text-[20px] tracking-[.20em]">{{$detail->serat ?? '-'}}</p>
                 </div>
             </div>
+            <h1 class="mt-20 text-black hover:text-oranye font-bebas font-medium text-[20px] tracking-[.20em]">Ulasan :</h1>
+            <div class="flex flex-col justify-self-center overflow-y-scroll h-[550px] p-6 mt-6 mb-10">
+                @foreach($ulasan as $ul)
+                <div class="flex justify-self-center mt-6">
+                    <div class="flex w-[1200px] h-[150px] bg-white rounded-xl px-10 py-6 drop-shadow-lg">
+                        <img src="{{ isset($ul->user->image_user) ? asset('storage/'.$ul->user->image_user) : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png' }}" alt="gambar" class="w-[90px] h-fit rounded-xl self-center">
+                        <div class="flex flex-col self-center ml-10">
+                            <p class="mb-2">{{$ul->user->name}}</p>
+                            <div class="mb-2">
+                                @if($ul->rating=='1')
+                                @include('layouts.star.1star')
+                                @elseif($ul->rating=='2')
+                                @include('layouts.star.2star')
+                                @elseif($ul->rating=='3')
+                                @include('layouts.star.3star')
+                                @elseif($ul->rating=='4')
+                                @include('layouts.star.4star')
+                                @else
+                                @include('layouts.star.5star')
+                                @endif
+                            </div>
+                            <p class="">{{$ul->komentar}}</p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
         </div>
     </div>
-
 </x-home-layout>
 
 <script>

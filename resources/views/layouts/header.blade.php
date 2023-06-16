@@ -13,5 +13,11 @@
 <body>
     @yield('content')
     @yield('js')
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            document.getElementById('defaultModalButton').click();
+            document.getElementById('updateProductButton').click();
+        });
+    </script>
 </body>
 </html>

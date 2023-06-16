@@ -11,9 +11,10 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\DetailProdukController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\AdminTransaksiController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\TransaksiController;
-use App\Http\Controllers\AdminKategoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,11 +31,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth', 'admin')->prefix('dashboard')->group(function () {
-    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/user', [AdminController::class, 'user'])->name('dashboard.user');
-    Route::get('/product', [AdminController::class, 'product'])->name('dashboard.product');
-    Route::resource('kategori', AdminKategoriController::class);
+Route::middleware('auth', 'admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard.user');
+    Route::get('/dashboard/product', [AdminController::class, 'product'])->name('dashboard.product');
 });
 
 Route::middleware('auth')->group(function () {
@@ -56,6 +56,7 @@ Route::post('/produk/create/{harga}/{idproduk}', [DetailProdukController::class,
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 
 Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan');
+Route::post('/ulasan/create/{idproduk}', [UlasanController::class, 'create'])->name('ulasan.create');
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
@@ -69,5 +70,7 @@ Route::post('/keranjang/checkout/transaksi', [TransaksiController::class, 'creat
 
 Route::get('/history', [HistoryController::class, 'index'])->name('history');
 Route::post('/history', [HistoryController::class, 'filter'])->name('history.filter');
+
+Route::get('/cetak/cetak_pdf', [HistoryController::class, 'cetak'])->name('history.cetak');
 
 require __DIR__ . '/auth.php';

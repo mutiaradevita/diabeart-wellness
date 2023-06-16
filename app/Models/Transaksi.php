@@ -20,13 +20,13 @@ class Transaksi extends Model
         'id',
         'tanggal',
         'metode_pembayaran',
-        'users',
+        'id_users',
         'alamat',
     ];
 
     public function user()
     {
-        return $this->belongsTo(Users::class);
+        return $this->belongsTo(Users::class, 'id_users');
     }
 
     public function keranjang()
