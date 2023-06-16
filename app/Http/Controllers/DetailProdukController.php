@@ -23,6 +23,7 @@ class DetailProdukController extends Controller
         $iduser = Auth::user()->id;
         $jumlah = $request->get('jumlah');
         $status = $request->get('status');
+        $ulasan = $request->get('ulasan');
         $catatan = $request->get('catatan');
 
         $keranjang = new Keranjang;
@@ -35,6 +36,7 @@ class DetailProdukController extends Controller
             $keranjang->catatan = $catatan;
         }
         $keranjang->status = $status;
+        $keranjang->ulasan = $ulasan;
         $keranjang->id_produk = $idproduk;
         $keranjang->id_users = $iduser;
         $keranjang->save();
