@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+[type='radio']:checked
+{
+  background-image: none;
+}
