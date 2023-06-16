@@ -13,6 +13,7 @@ use App\Http\Controllers\DetailProdukController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\AdminKategoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +30,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth', 'admin')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard.user');
-    Route::get('/dashboard/product', [AdminController::class, 'product'])->name('dashboard.product');
+Route::middleware('auth', 'admin')->prefix('dashboard')->group(function () {
+    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/user', [AdminController::class, 'user'])->name('dashboard.user');
+    Route::get('/product', [AdminController::class, 'product'])->name('dashboard.product');
+    Route::resource('kategori', AdminKategoriController::class);
 });
 
 Route::middleware('auth')->group(function () {
