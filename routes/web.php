@@ -45,13 +45,12 @@ Route::middleware('auth', 'admin')->prefix('dashboard')->group(function () {
         Route::resource('/dashboard/user', AdminUserController::class);
         Route::resource('/dashboard/review', AdminReviewController::class);
         Route::resource('kategori', AdminKategoriController::class);
-        // Route::post('/dashboard/user', [AdminUserController::class, 'store'])->name('user.store');
         Route::resource('dashboard/product', AdminProdukController::class);
         Route::get('/dashboard/transaksi', [AdminTransaksiController::class, 'index'])->name('dashboard.transaksi');
         Route::get('/dashboard/transaksi/keranjang', [AdminTransaksiController::class, 'readKeranjang'])->name('dashboard.transaksi.keranjang');
         Route::put('/dashboard/transaksi/{id}', [AdminTransaksiController::class, 'update'])->name('dashboard.transaksi.update');
         Route::get('/dashboard/transaksi/cetakLaporan', [AdminTransaksiController::class, 'cetak'])->name('dashboard.transaksi.cetak');
-        // Route::delete('/dashboard/transaksi/{id}', [AdminTransaksiController::class, 'destroy'])->name('dashboard.transaksi.destroy');
+    });
 });
 
 Route::middleware('auth')->group(function () {
