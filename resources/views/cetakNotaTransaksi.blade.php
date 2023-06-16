@@ -130,7 +130,7 @@
 						<table>
 							<tr>
 								<td class="title">
-									<img src="imaage" alt="Company logo" style="width: 100%; max-width: 300px" />
+									<img src="{{ 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logobg1.png'))) }}" alt="Company logo" style="width: 100%; max-width: 300px" />
 								</td>
 
 								<td>

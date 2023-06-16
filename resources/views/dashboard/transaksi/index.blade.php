@@ -91,20 +91,65 @@
                                         @method('PUT')
                                         @csrf
                                         <input type="hidden" name="status" value="done">
-                                        <a class="font-medium text-white dark:white"><button type="submit" class="bg-green-400 hover:bg-green-500 p-2 m-1 rounded-md">Selesaikan</button></a>
+                                        {{-- modal --}}
+                                        <a class="font-medium text-white dark:white"><button data-modal-target="popup-modal{{$item->invoice}}" data-modal-toggle="popup-modal{{$item->invoice}}" class="bg-green-400 hover:bg-green-500 p-2 m-1 rounded-md" type="button">
+                                        Selesaikan
+                                        </button></a>
+                                        <div id="popup-modal{{$item->invoice}}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                            <div class="relative w-full max-w-md max-h-full">
+                                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="popup-modal{{$item->invoice}}">
+                                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                                        <span class="sr-only">Close modal</span>
+                                                    </button>
+                                                    <div class="p-6 text-center">
+                                                        <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda Yakin Ingin Menyelesaikan Pesanan?</h3>
+                                                        <button data-modal-hide="popup-modal{{$item->invoice}}" type="submit" class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                                            Yakin
+                                                        </button>
+                                                        <button data-modal-hide="popup-modal{{$item->invoice}}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Tidak</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- <a class="font-medium text-white dark:white"><button type="submit" class="bg-green-400 hover:bg-green-500 p-2 m-1 rounded-md">Selesaikan</button></a> --}}
                                     </form>
                                     <form method="POST" action="{{ route('dashboard.transaksi.update', $item->id) }}">
                                         @method('PUT')
                                         @csrf
                                         <input type="hidden" name="status" value="cancel">
-                                        <a class="font-medium text-white dark:text-white"><button type="submit" class="bg-red-500 hover:bg-red-600 p-2 m-1 rounded-md">Batalkan</button></a>
+                                        {{-- <a class="font-medium text-white dark:text-white"><button type="submit" class="bg-red-500 hover:bg-red-600 p-2 m-1 rounded-md">Batalkan</button></a> --}}
+
+                                        {{-- modal --}}
+                                        <a class="font-medium text-white dark:text-white"><button data-modal-target="popup-modal{{$item->id}}" data-modal-toggle="popup-modal{{$item->id}}" class="bg-red-500 hover:bg-red-600 p-2 m-1 rounded-md" type="button">
+                                        Batalkan
+                                        </button></a>
+                                        <div id="popup-modal{{$item->id}}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                            <div class="relative w-full max-w-md max-h-full">
+                                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="popup-modal{{$item->id}}">
+                                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                                        <span class="sr-only">Close modal</span>
+                                                    </button>
+                                                    <div class="p-6 text-center">
+                                                        <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda Yakin Ingin Membatalkan Pesanan?</h3>
+                                                        <button data-modal-hide="popup-modal{{$item->id}}" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                                            Yakin
+                                                        </button>
+                                                        <button data-modal-hide="popup-modal{{$item->id}}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Tidak</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </form>
-                                @elseif($item->status == 'cancel')
+                                {{-- @elseif($item->status == 'cancel')
                                     <form action="{{route('dashboard.transaksi.destroy', $item->id)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <a class="font-medium text-white dark:text-white"><button type="submit" class="bg-red-500 hover:bg-red-600 p-2 m-1 rounded-md">Hapus</button></a>
-                                    </form>
+                                    </form> --}}
                                 @endif
                             </td>
                         </tr>
@@ -128,9 +173,34 @@
                 @endif
                 </div>
             @endif
-           
+            <div class="mt-20 mb-10">
+                <form action="{{ route('dashboard.transaksi.cetak') }}" method="GET">
+                    <div class="justify-center grid">
+                        <div class="mr-4">
+                        <!-- Cari/Filter berdasarkan Rating -->
+                            <div class="mb-3">
+                                <label for="jangka">Rentang Waktu Cetak</label>
+                                <select name="tanggal" id="tanggal">
+                                <option value="all">Semua</option>
+                                <option value="hari">1 Hari Terakhir</option>
+                                <option value="minggu">7 Hari Terakhir</option>
+                                <option value="bulan">1 Bulan Terakhir</option>
+                                <option value="tahun">1 Tahun Terakhir</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid justify-items-center">
+                        <button type="submit" class="flex p-2.5 ml-0 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800">
+                            <div class="mr-3">Cetak Laporan</div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16"><path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/><path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/></svg>
+                        </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             
         </div>
-
+       
     </div>
+
 @endsection

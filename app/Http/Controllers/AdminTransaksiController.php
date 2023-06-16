@@ -7,6 +7,8 @@ use App\Models\Transaksi;
 use App\Models\User;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\PDF;
+use Carbon\Carbon;
 
 class AdminTransaksiController extends Controller
 {
@@ -42,27 +44,60 @@ class AdminTransaksiController extends Controller
         return view('dashboard.transaksi.keranjang', compact('keranjang'));
     }
 
-    public function destroy($id)
+    public function cetak(Request $request)
     {
-        $transaksi = Transaksi::findOrFail($id);
-
-        // Ambil semua keranjang yang terkait dengan transaksi
-        $keranjangs = $transaksi->keranjang;
-
-        // Detach dan hapus keranjang satu per satu
-        foreach ($keranjangs as $keranjang) {
-            $keranjang->transaksi()->detach();
-            $keranjang->delete();
+        $tanggal = Carbon::now();
+        if($request->get('tanggal') == 'all'){
+            $transaksi = Transaksi::all();
+        } elseif($request->get('tanggal') == 'hari'){
+            $tanggalSekarang = $tanggal->copy()->now()->format('Y-m-d H:i:s');
+            $tanggalMulai = $tanggal->copy()->subDays(1)->format('Y-m-d H:i:s');
+            $transaksi = Transaksi::whereBetween('tanggal', [$tanggalMulai, $tanggalSekarang])->orderBy('tanggal', 'desc')->get();
+        } elseif($request->get('tanggal') == 'minggu'){
+            $tanggalSekarang = $tanggal->copy()->now()->format('Y-m-d H:i:s');
+            $tanggalMulai = $tanggal->copy()->subWeeks(1)->format('Y-m-d H:i:s');
+            $transaksi = Transaksi::whereBetween('tanggal', [$tanggalMulai, $tanggalSekarang])->orderBy('tanggal', 'desc')->get();
+        } elseif($request->get('tanggal') == 'bulan'){
+            $tanggalSekarang = $tanggal->copy()->now()->format('Y-m-d H:i:s');
+            $tanggalMulai = $tanggal->copy()->subMonths(1)->format('Y-m-d H:i:s');
+            $transaksi = Transaksi::whereBetween('tanggal', [$tanggalMulai, $tanggalSekarang])->orderBy('tanggal', 'desc')->get();
+        } else{
+            $tanggalSekarang = $tanggal->copy()->now()->format('Y-m-d H:i:s');
+            $tanggalMulai = $tanggal->copy()->subYears(1)->format('Y-m-d H:i:s');
+            $transaksi = Transaksi::whereBetween('tanggal', [$tanggalMulai, $tanggalSekarang])->orderBy('tanggal', 'desc')->get();
         }
 
-        // Hapus entri pada tabel pivot (keranjang_transaksi)
-        $transaksi->keranjang()->detach();
+        $totalPendapatan = $transaksi->where('status', 'done')->sum('total');
+        
 
-        // Hapus transaksi
-        $transaksi->delete();
-
-        return redirect()->route('dashboard.transaksi');
+        $pdf = PDF::loadview('dashboard.transaksi.cetakLaporan', compact('transaksi', 'totalPendapatan'))->setPaper('A4', 'landscape');;
+        return $pdf->stream();
+        // return view('dashboard.transaksi.cetakLaporan', compact('transaksi', 'totalPendapatan'));
     }
+
+
+
+    // public function destroy($id)
+    // {
+    //     $transaksi = Transaksi::findOrFail($id);
+
+    //     // Ambil semua keranjang yang terkait dengan transaksi
+    //     $keranjangs = $transaksi->keranjang;
+
+    //     // Detach dan hapus keranjang satu per satu
+    //     foreach ($keranjangs as $keranjang) {
+    //         $keranjang->transaksi()->detach();
+    //         $keranjang->delete();
+    //     }
+
+    //     // Hapus entri pada tabel pivot (keranjang_transaksi)
+    //     $transaksi->keranjang()->detach();
+
+    //     // Hapus transaksi
+    //     $transaksi->delete();
+
+    //     return redirect()->route('dashboard.transaksi');
+    // }
 
 
 }
