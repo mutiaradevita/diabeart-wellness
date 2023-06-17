@@ -68,6 +68,7 @@ class AdminProdukController extends Controller
         $produk->protein = $request->get('protein');
         $produk->kalori = $request->get('kalori');
         $produk->serat = $request->get('serat');
+        $produk->hidden = "no";
         $produk->save();
 
         $kategoris = $request->get('kategoris');
@@ -153,6 +154,20 @@ class AdminProdukController extends Controller
         // Delete the produk
         $produk->delete();
 
-        return redirect()->route('product.index')->with('success', 'Produk telah dihapus');;
+        return redirect()->route('product.index')->with('success', 'Produk telah dihapus');
+    }
+
+    public function hidden($id){
+        $produk = Produk::findOrFail($id);
+        $produk->hidden = "yes";
+        $produk->save();
+        return redirect()->route('product.index')->with('success', 'Berhasil merubah produk');
+    }
+
+    public function visible($id){
+        $produk = Produk::findOrFail($id);
+        $produk->hidden = "no";
+        $produk->save();
+        return redirect()->route('product.index')->with('success', 'Berhasil merubah produk');
     }
 }
