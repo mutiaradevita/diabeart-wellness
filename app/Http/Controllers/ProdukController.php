@@ -18,6 +18,6 @@ class ProdukController extends Controller
         $Kategori = Kategori::where('nama_kategori', $kategori)->first();
         $idkategori = $Kategori->id;
         $produk = Kategori_Produk::where('id_kategori', $idkategori)->get();
-        return view('produk_kat', compact('produk'));
+        return view('produk_kat', compact('produk', 'kategori'));
     }
 }
