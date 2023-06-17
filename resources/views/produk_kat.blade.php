@@ -9,6 +9,7 @@
             @else
             <div class="grid grid-cols-4 gap-x-10 gap-y-10 mt-10 my-20">
                 @foreach($produk as $Produk)
+                @if($Produk->Produk->hidden=="no")
                 <div class="bg-gray-100 w-fit h-fit hover:bg-gray-200 shadow-lg rounded-2xl duration-500 hover:scale-105 hover:shadow-2xl">
                     <a href="{{route('detail', ['nama' => $Produk->Produk->nama])}}" class="mt-6">
                         <img src="{{asset('storage/'. $Produk->Produk->gambar)}}" alt="produk" class="object-cover h-[240px] w-[300px] rounded-t-2xl">
@@ -30,6 +31,8 @@
                         </div>
                     </a>
                 </div>
+                @else
+                @endif
                 @endforeach
             </div>
             @endif

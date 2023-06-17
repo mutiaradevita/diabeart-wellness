@@ -66,6 +66,9 @@
                         Serat
                     </th>
                     <th scope="col" class="px-2 py-3">
+                        Hidden
+                    </th>
+                    <th scope="col" class="px-2 py-3">
                         Action
                     </th>
                 </tr>
@@ -108,8 +111,11 @@
                     <td class="px-2 py-4">
                         {{ $produk->serat }}
                     </td>
+                    <td class="px-2 py-4">
+                        {{ $produk->hidden ?? 'Belum diset' }}
+                    </td>
                     <td class="px-6 py-4">
-                        <button data-modal-target="authentication-modal{{$produk->id}}" data-modal-toggle="authentication-modal{{$produk->id}}" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900 justify-content-end w-[80px]" type="button">
+                        <button data-modal-target="authentication-modal{{$produk->id}}" data-modal-toggle="authentication-modal{{$produk->id}}" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900 justify-content-end w-[80px]" type="button">
                             Edit
                         </button>
                         <div id="authentication-modal{{$produk->id}}" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -207,8 +213,24 @@
                                     </div>
                                 </div>
                             </div>
-
                         </form>
+                        @if($produk->hidden=="no")
+                        <form action="{{ route('dashboard.product.hidden', $produk->id) }}" method="post">
+                            @csrf
+                            @method('PUT')
+                            <button class="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm py-2.5 mr-2 mb-2 justify-content-end w-[80px]" type="submit">
+                                Hidden
+                            </button>
+                        </form>
+                        @else
+                        <form action="{{ route('dashboard.product.visible', $produk->id) }}" method="post">
+                            @csrf
+                            @method('PUT')
+                            <button class="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm py-2.5 mr-2 mb-2 justify-content-end w-[80px]" type="submit">
+                                Visible
+                            </button>
+                        </form>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
@@ -269,7 +291,7 @@
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="protein">Protein</label>
-                    <input type="text" name="protein" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-[100px] p-2.5 mb-4" placeholder="Protein" >
+                    <input type="text" name="protein" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-[100px] p-2.5 mb-4" placeholder="Protein">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="kalori">Kalori</label>
