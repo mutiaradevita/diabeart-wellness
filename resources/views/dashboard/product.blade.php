@@ -41,6 +41,9 @@
                     <th scope="col" class="px-6 py-3">
                         Gambar
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                        kategori
+                    </th>
                     <th scope="col" class="px-12 py-3">
                         Deskripsi
                     </th>
@@ -50,19 +53,19 @@
                     <th scope="col" class="px-6 py-3">
                         Komposisi
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-2 py-3">
                         Karbo
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-2 py-3">
                         Protein
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-2 py-3">
                         Kalori
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-2 py-3">
                         Serat
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-2 py-3">
                         Action
                     </th>
                 </tr>
@@ -80,6 +83,11 @@
                         <img src="{{asset('storage/'. $produk->gambar)}}" alt="gambar" class="w-[80px]">
                     </td>
                     <td class="px-6 py-4">
+                        @foreach($produk->Kategori as $ktg)
+                        {{ $ktg->nama_kategori }}
+                        @endforeach
+                    </td>
+                    <td class="px-6 py-4">
                         {{ $produk->deskripsi }}
                     </td>
                     <td class="px-6 py-4">
@@ -88,16 +96,16 @@
                     <td class="px-6 py-4">
                         {{ $produk->komposisi }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-2 py-4">
                         {{ $produk->karbo }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-2 py-4">
                         {{ $produk->protein }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-2 py-4">
                         {{ $produk->kalori }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-2 py-4">
                         {{ $produk->serat }}
                     </td>
                     <td class="px-6 py-4">
