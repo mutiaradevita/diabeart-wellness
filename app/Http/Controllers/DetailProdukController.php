@@ -15,7 +15,9 @@ class DetailProdukController extends Controller
         $detail = Produk::where('nama', $nama)->first();
         $idproduk = $detail->id;
         $ulasan = Ulasan::where('id_produk', $idproduk)->orderBy('id', 'desc')->get();
-        return view('detail', compact('detail', 'ulasan'));
+        $creview = $ulasan->count();
+        $avgrating = number_format($ulasan->avg('rating'), 2);
+        return view('detail', compact('detail', 'ulasan', 'creview', 'avgrating'));
     }
 
     public function create(Request $request, $harga, $idproduk)
