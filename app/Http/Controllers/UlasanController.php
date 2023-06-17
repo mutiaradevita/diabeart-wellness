@@ -32,6 +32,6 @@ class UlasanController extends Controller
         $keranjang = Keranjang::FindOrFail($idkeranjang);
         $keranjang->ulasan = 'done';
         $keranjang->save();
-        return redirect()->route('ulasan');
+        return redirect()->route('ulasan')->with('success', 'Ulasan anda telah ditambahkan!');
     }
 }

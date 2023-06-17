@@ -40,6 +40,6 @@ class DetailProdukController extends Controller
         $keranjang->id_produk = $idproduk;
         $keranjang->id_users = $iduser;
         $keranjang->save();
-        return redirect()->route('produk');
+        return redirect()->route('produk')->with('success', 'Produk dimasukkan ke Keranjang');
     }
 }

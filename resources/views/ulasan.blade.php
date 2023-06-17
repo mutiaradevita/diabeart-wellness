@@ -1,5 +1,10 @@
 <x-home-layout>
     @if(Auth::check())
+    <div class="grid sticky top-[100px] justify-items-center z-50">
+        <div class="absolute">
+            @include('toast.toast')
+        </div>
+    </div>
     <div class="flex justify-center w-full min-h-screen h-max bg-kuning">
         <div class="flex flex-col mt-24">
             <h1 class="font-bebas text-white text-[70px] tracking-[.20em] mx-auto">ulas produk yang telah anda beli!</h1>
