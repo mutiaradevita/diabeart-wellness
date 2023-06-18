@@ -1,38 +1,62 @@
 <x-home-layout>
     @if(Auth::check())
+    <div class="grid sticky top-[100px] justify-items-center z-50">
+        <div class="absolute">
+            @include('toast.toast')
+        </div>
+    </div>
     <div class="flex justify-center w-full min-h-screen h-max bg-kuning">
         <div class="flex flex-col mt-24">
             <h1 class="font-bebas text-white text-[70px] tracking-[.20em] mx-auto">ulas produk yang telah anda beli!</h1>
             <h3 class="font-bebas text-oranyet text-[40px] tracking-[.20em] mx-auto">kami sangat senang jika anda berkenan mengulas produk kami</h3>
 
             @if($transaksi->isEmpty())
-            <h3 class="font-bebas text-black text-[40px] tracking-[.20em] mx-auto mt-40">Anda belum membeli produk</h3>
+            <h3 class="font-bebas text-black text-[40px] tracking-[.20em] mx-auto mt-40">belum ada produk yang dapat diulas</h3>
             @else
             <div class="flex flex-col mx-auto mt-10 mb-20">
+                @php
+                $ada_process = false;
+                @endphp
                 @foreach($transaksi as $trans)
                 @foreach($trans->keranjang as $ker)
+                @if($ker->ulasan=='process')
+                @php
+                    $ada_process = true;
+                @endphp
                 <div class="flex w-[1200px] h-[200px] bg-white rounded-xl p-6 drop-shadow-lg mt-6">
                     <img src="{{asset('storage/'. $ker->produk->gambar)}}" alt="gambar" class="w-[160px] h-[150px] rounded-xl">
-                    <p class="ml-4">{{$ker->produk->nama}}</p>
+                    <div class="flex flex-col item-stretch ml-6">
+                        <p class="text-[25px]">{{$ker->produk->nama}}</p>
+                        <p class="text-[18px] mt-2">{{$ker->jumlah}} x Rp {{$ker->produk->harga}}</p>
+                        <p class="text-[18px] mt-12">Total = Rp {{$ker->total_harga}}</p>
+                    </div>
                     <div class="absolute flex flex-col right-6">
-                        <p class="mb-4">Ulasan Anda:</p>
-                        <form action="{{ route('ulasan.create', $ker->produk->id) }}" method="POST" class="place-self-end">
+                        <p class="mb-4 text-[20px]">Ulasan Anda:</p>
+                        <form action="{{ route('ulasan.create', ['idproduk' => $ker->produk->id, 'idkeranjang' => $ker->id]) }}" method="POST" class="place-self-end">
                             @csrf
                             @method('POST')
                             <input type="text" name="komentar" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-[500px] p-2.5">
                             <div class="flex mt-4">
-                                <div>
-                                    <input type="text" name="rating" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-[100px] p-2.5">
+                                <div class="rating self-center">
+                                    <input type="radio" name="rating" value="1" class="mask mask-star-2 bg-orange-400 text-orange-400" checked />
+                                    <input type="radio" name="rating" value="2" class="mask mask-star-2 bg-orange-400 text-orange-400" />
+                                    <input type="radio" name="rating" value="3" class="mask mask-star-2 bg-orange-400 text-orange-400" />
+                                    <input type="radio" name="rating" value="4" class="mask mask-star-2 bg-orange-400 text-orange-400" />
+                                    <input type="radio" name="rating" value="5" class="mask mask-star-2 bg-orange-400 text-orange-400" />
                                 </div>
-                                <button class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900 justify-content-end ml-4" type="submit">
+                                <button class="focus:outline-none text-white self-center bg-oranye hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-md px-6 py-2 ml-4" type="submit">
                                     Ulas
                                 </button>
                             </div>
                         </form>
                     </div>
                 </div>
+                @endif
                 @endforeach
                 @endforeach
+                @if (!$ada_process)
+                <h3 class="font-bebas text-black text-[40px] tracking-[.20em] mx-auto mt-40">belum ada produk yang dapat diulas</h3>
+                @endif
             </div>
             @endif
         </div>
