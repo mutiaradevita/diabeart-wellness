@@ -75,14 +75,14 @@ Route::post('/produk/create/{harga}/{idproduk}', [DetailProdukController::class,
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 
 Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan');
-Route::post('/ulasan/create/{idproduk}', [UlasanController::class, 'create'])->name('ulasan.create');
+Route::post('/ulasan/create/{idproduk}/{idkeranjang}', [UlasanController::class, 'create'])->name('ulasan.create');
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/keranjang/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
 Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang');
-Route::delete('/keranjang/{idproduk}/{idkeranjang}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
+Route::delete('/keranjang/{id}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
 
 Route::get('/keranjang/checkout/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
 Route::post('/keranjang/checkout/transaksi', [TransaksiController::class, 'create'])->name('transaksi.create');
