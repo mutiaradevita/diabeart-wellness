@@ -49,7 +49,7 @@
                 @foreach($kategori as $Kategori)
                 <a href="{{route('produk_kategori',$Kategori->nama_kategori)}}" class="mt-6">
                     <div class="grid bg-gray-100 w-[250px] h-[350px] hover:bg-gray-200 shadow-lg rounded-2xl duration-500 hover:scale-105 hover:shadow-2xl">
-                        <img src="{{$Kategori->gambar}}" alt="kategori" class="justify-self-center bg-white rounded-full w-[170px] h-[170px] mt-10">
+                        <img src="{{asset('storage/'. $Kategori->gambar)}}" alt="kategori" class="justify-self-center bg-white rounded-full w-[170px] h-[170px] mt-10">
                         <div class="grid">
                             <p class="justify-self-center text-lg font-bold text-black truncate block capitalize">{{$Kategori->nama_kategori}}</p>
                         </div>
