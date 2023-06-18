@@ -1,6 +1,6 @@
 <x-home-layout>
-    <div class="flex w-full bg-kuning min-h-screen h-max">
-        <div class="mt-24 mx-auto">
+    <div class="flex justify-center w-full bg-kuning min-h-screen h-max">
+        <div class="mt-24">
             <h1 class="font-bebas text-white text-[50px] tracking-[.20em]">Product / {{$detail->nama ?? 'None'}}</h1>
             <hr class="h-2 bg-white">
             <div class="flex my-10">
@@ -10,14 +10,14 @@
                         <h1 class="font-bebas text-white text-[60px] tracking-[.20em]">{{$detail->nama}}</h1>
                         <p class="font-bebas text-black text-[20px] tracking-[.20em]">{{$detail->deskripsi}}</p>
 
-                        <div class="flex items-center mt-6">
+                        <div class="flex items-center mt-12">
                             <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <title>Rating star</title>
                                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                             </svg>
-                            <p class="ml-2 text-sm font-bold text-gray-900 dark:text-white">4.95</p>
+                            <p class="ml-2 mr-2 text-sm font-bold text-gray-900 dark:text-white">{{$avgrating}}</p>
                             <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-                            <a href="#" class="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white">73 reviews</a>
+                            <a href="#ulasann" class="ml-2 text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white">{{$creview}} reviews</a>
                         </div>
 
                     </div>
@@ -48,6 +48,7 @@
                             @method('POST')
                             <input type="hidden" id="data" name="jumlah" value="1">
                             <input type="hidden" id="status" name="status" value="process">
+                            <input type="hidden" id="ulasan" name="ulasan" value="process">
                             <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                 <div class="relative w-full max-w-md max-h-full">
                                     <!-- Modal content -->
@@ -106,35 +107,43 @@
                     <p class="font-bebas text-black text-[20px] tracking-[.20em]">{{$detail->serat ?? '-'}}</p>
                 </div>
             </div>
-            <h1 class="mt-20 text-black hover:text-oranye font-bebas font-medium text-[20px] tracking-[.20em]">Ulasan :</h1>
-            <div class="flex flex-col justify-self-center overflow-y-scroll h-[550px] p-6 mt-6 mb-10">
-                @foreach($ulasan as $ul)
-                <div class="flex justify-self-center mt-6">
-                    <div class="flex w-[1200px] h-[150px] bg-white rounded-xl px-10 py-6 drop-shadow-lg">
-                        <img src="{{ isset($ul->user->image_user) ? asset('storage/'.$ul->user->image_user) : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png' }}" alt="gambar" class="w-[90px] h-fit rounded-xl self-center">
-                        <div class="flex flex-col self-center ml-10">
-                            <p class="mb-2">{{$ul->user->name}}</p>
-                            <div class="mb-2">
-                                @if($ul->rating=='1')
-                                @include('layouts.star.1star')
-                                @elseif($ul->rating=='2')
-                                @include('layouts.star.2star')
-                                @elseif($ul->rating=='3')
-                                @include('layouts.star.3star')
-                                @elseif($ul->rating=='4')
-                                @include('layouts.star.4star')
-                                @else
-                                @include('layouts.star.5star')
-                                @endif
+            <h1 id="ulasann" class="font-bebas text-white text-[50px] tracking-[.20em] mt-6 mb-4">Ulasan :</h1>
+            @if($ulasan->isEmpty())
+            <div class="grid">
+                <h1 class="font-bebas text-black justify-self-center text-[40px] tracking-[.20em] my-20">Belum ada ulasan</h3>
+            </div>
+            @elseif($ulasan->count()>1)
+            <div class="flex flex-col justify-self-center overflow-y-scroll h-[390px] p-6 mb-10">
+                @else
+                <div class="flex flex-col justify-self-center mb-10">
+                    @endif
+                    @foreach($ulasan as $ul)
+                    <div class="flex justify-self-center mt-6">
+                        <div class="flex w-[1200px] h-[150px] bg-white rounded-xl px-10 py-6 drop-shadow-lg">
+                            <img src="{{ isset($ul->user->image_user) ? asset('storage/'.$ul->user->image_user) : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png' }}" alt="gambar" class="w-[90px] h-fit rounded-xl self-center">
+                            <div class="flex flex-col self-center ml-10">
+                                <p class="mb-2">{{$ul->user->name}}</p>
+                                <div class="mb-2">
+                                    @if($ul->rating=='1')
+                                    @include('layouts.star.1star')
+                                    @elseif($ul->rating=='2')
+                                    @include('layouts.star.2star')
+                                    @elseif($ul->rating=='3')
+                                    @include('layouts.star.3star')
+                                    @elseif($ul->rating=='4')
+                                    @include('layouts.star.4star')
+                                    @else
+                                    @include('layouts.star.5star')
+                                    @endif
+                                </div>
+                                <p class="">{{$ul->komentar}}</p>
                             </div>
-                            <p class="">{{$ul->komentar}}</p>
                         </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
         </div>
-    </div>
 </x-home-layout>
 
 <script>

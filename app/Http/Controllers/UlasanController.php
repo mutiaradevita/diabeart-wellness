@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaksi;
+use App\Models\Keranjang;
 use App\Models\Ulasan;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +21,7 @@ class UlasanController extends Controller
         }
     }
 
-    public function create(Request $request, $idproduk){
+    public function create(Request $request, $idproduk, $idkeranjang){
         $iduser = Auth::user()->id;
         $ulasan = new Ulasan;
         $ulasan->rating = $request->get('rating');
@@ -28,6 +29,9 @@ class UlasanController extends Controller
         $ulasan->id_users = $iduser;
         $ulasan->id_produk = $idproduk;
         $ulasan->save();
-        return redirect()->route('ulasan');
+        $keranjang = Keranjang::FindOrFail($idkeranjang);
+        $keranjang->ulasan = 'done';
+        $keranjang->save();
+        return redirect()->route('ulasan')->with('success', 'Ulasan anda telah ditambahkan!');
     }
 }
