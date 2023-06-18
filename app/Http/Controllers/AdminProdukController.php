@@ -16,22 +16,16 @@ class AdminProdukController extends Controller
      */
     public function index(Request $request)
     {
-        $Produk = Produk::where([
-            ['nama', '!=', Null],
-            [function ($query) use ($request) {
-                if (($search = $request->search)) {
-                    $query->orWhere('nama', 'LIKE', '%' . $search . '%')
-                        ->get();
-                }
-            }]
-        ])->orderBy('nama', 'desc')->paginate(5);
-        // $currentPage = $produk->currentPage();
-        // $hasMorePages = $produk->hasMorePages();
-        // $nextPage = $produk->nextPageUrl();
-        // $prevPage = $produk->previousPageUrl();
-        
-        $kategori = Kategori::all();
-        return view('dashboard.product', compact('kategori', 'Produk'))->with('i', (request()->input('page', 1) - 1) * 5);
+        if($request->has('search')){
+            $nama = request('search');
+            $Produk = Produk::where('nama', 'LIKE', '%'.$nama.'%')->paginate(5);
+            $kategori = Kategori::all();
+            return view('dashboard.product', compact('kategori', 'Produk'));
+        } else {
+            $Produk = Produk::orderBy('id', 'desc')->paginate(5);
+            $kategori = Kategori::all();
+            return view('dashboard.product', compact('kategori', 'Produk')); 
+        }
     }
 
     /**

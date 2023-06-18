@@ -22,8 +22,8 @@ class AdminUserController extends Controller
                         ->get();
                 }
             }]
-        ])->paginate(15);
-        return view('dashboard.user', compact('user'));
+        ])->paginate(5);
+        return view('dashboard.user', compact('user'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
