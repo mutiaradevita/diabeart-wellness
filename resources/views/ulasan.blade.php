@@ -62,9 +62,9 @@
         </div>
     </div>
     @else
-    <div class="relative bg-[url('../../public/img/bg-makanan.jpg')] bg-cover bg-center ">
+    <div class="relative bg-[url('../../public/img/bg-makanan.jpg')] bg-cover bg-center pt-14">
         <div class="flex w-full h-full bg-gray-900 bg-opacity-20">
-            <div class="grid w-4/12 h-full bg-oranye p-2 rounded-r-full font-bebas text-5xl tracking-[.10em] items-center">
+            <div class="grid w-4/12 bg-oranye p-2 rounded-r-full font-bebas text-5xl tracking-[.10em] items-center">
                 <div class="text-white pl-1 text-center">
                     APA KATA MEREKA?
                     <br>
@@ -97,8 +97,8 @@
                         <figcaption class="flex items-center mt-3 space-x-3">
                             <img class="w-6 h-6 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="profile picture">
                             <div class="flex items-center divide-x-2 divide-gray-300 dark:divide-gray-700">
-                                <cite class="pr-3 font-small">Elon Musk</cite>
-                                <cite class="pl-3 text-xs text-gray-500 dark:text-gray-400">CTO at Flowbite</cite>
+                                <cite class="pr-3 font-small">Emelia Irana</cite>
+                                <cite class="pl-3 text-xs text-gray-500 dark:text-gray-400">Customer</cite>
                             </div>
                         </figcaption>
                     </figure>
@@ -124,13 +124,13 @@
                             </svg>
                         </div>
                         <blockquote>
-                            <p class="text-xs">"Harganya terjangkau"</p>
+                            <p class="text-xs">"cocok untuk penderita diabetes"</p>
                         </blockquote>
                         <figcaption class="flex items-center mt-3 space-x-3">
                             <img class="w-6 h-6 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="profile picture">
                             <div class="flex items-center divide-x-2 divide-gray-300 dark:divide-gray-700">
-                                <cite class="pr-3 font-small">Elon Musk</cite>
-                                <cite class="pl-3 text-xs text-gray-500 dark:text-gray-400">CTO at Flowbite</cite>
+                                <cite class="pr-3 font-small">Andi Subagio</cite>
+                                <cite class="pl-3 text-xs text-gray-500 dark:text-gray-400">Customer</cite>
                             </div>
                         </figcaption>
                     </figure>
@@ -156,13 +156,13 @@
                             </svg>
                         </div>
                         <blockquote>
-                            <p class="text-xs">"Harganya terjangkau"</p>
+                            <p class="text-xs">"Rasa The Best"</p>
                         </blockquote>
                         <figcaption class="flex items-center mt-3 space-x-3">
                             <img class="w-6 h-6 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="profile picture">
                             <div class="flex items-center divide-x-2 divide-gray-300 dark:divide-gray-700">
-                                <cite class="pr-3 font-small">Elon Musk</cite>
-                                <cite class="pl-3 text-xs text-gray-500 dark:text-gray-400">CTO at Flowbite</cite>
+                                <cite class="pr-3 font-small">Suri Tauladani</cite>
+                                <cite class="pl-3 text-xs text-gray-500 dark:text-gray-400">Customer</cite>
                             </div>
                         </figcaption>
                     </figure>
@@ -188,13 +188,13 @@
                             </svg>
                         </div>
                         <blockquote>
-                            <p class="text-xs">"Harganya terjangkau"</p>
+                            <p class="text-xs">"enak bangett!!"</p>
                         </blockquote>
                         <figcaption class="flex items-center mt-3 space-x-3">
                             <img class="w-6 h-6 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="profile picture">
                             <div class="flex items-center divide-x-2 divide-gray-300 dark:divide-gray-700">
-                                <cite class="pr-3 font-small">Elon Musk</cite>
-                                <cite class="pl-3 text-xs text-gray-500 dark:text-gray-400">CTO at Flowbite</cite>
+                                <cite class="pr-3 font-small">Intan Adinda</cite>
+                                <cite class="pl-3 text-xs text-gray-500 dark:text-gray-400">Customer</cite>
                             </div>
                         </figcaption>
                     </figure>
@@ -220,13 +220,13 @@
                             </svg>
                         </div>
                         <blockquote>
-                            <p class="text-xs">"Harganya terjangkau"</p>
+                            <p class="text-xs">"Rasa Juara"</p>
                         </blockquote>
                         <figcaption class="flex items-center mt-3 space-x-3">
                             <img class="w-6 h-6 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="profile picture">
                             <div class="flex items-center divide-x-2 divide-gray-300 dark:divide-gray-700">
-                                <cite class="pr-3 font-small">Elon Musk</cite>
-                                <cite class="pl-3 text-xs text-gray-500 dark:text-gray-400">CTO at Flowbite</cite>
+                                <cite class="pr-3 font-small">Gangnam Indra</cite>
+                                <cite class="pl-3 text-xs text-gray-500 dark:text-gray-400">Customer</cite>
                             </div>
                         </figcaption>
                     </figure>
@@ -243,7 +243,7 @@
         <div class="text-white text-center">
             TUNGGU APA LAGI?
             <div class="text-black mt-10">
-                <a href="#" class="h-fit w-fit p-2 text-4xl rounded-2xl bg-kuning hover:bg-gray-800 hover:text-white ">ORDER SEKARANG</a>
+                <a href="{{ route('produk') }}" class="h-fit w-fit p-2 text-4xl rounded-2xl bg-kuning hover:bg-gray-800 hover:text-white ">ORDER SEKARANG</a>
             </div>
         </div>
 
