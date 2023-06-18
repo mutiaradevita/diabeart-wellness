@@ -40,6 +40,20 @@ class AdminProdukController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'nama' => 'required',
+            'kategoris' => 'required',
+            'gambar' => 'required',
+            'deskripsi' => 'required',
+            'harga' => 'required',
+            'komposisi' => 'required',
+            'karbo' => 'required',
+            'protein' => 'required',
+            'kalori' => 'required',
+            'serat' => 'required',
+        ]);
+
         if ($request->file('gambar')) {
             $gambar = $request->file('gambar')->store('images', 'public');
         }
@@ -54,6 +68,7 @@ class AdminProdukController extends Controller
         $produk->protein = $request->get('protein');
         $produk->kalori = $request->get('kalori');
         $produk->serat = $request->get('serat');
+        $produk->hidden = "no";
         $produk->save();
 
         $kategoris = $request->get('kategoris');
@@ -62,7 +77,7 @@ class AdminProdukController extends Controller
             $produk->kategori()->attach($kats->id);
             $kats->save();
         }
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Produk telah ditambahkan');;
     }
 
     /**
@@ -84,13 +99,31 @@ class AdminProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'nama' => 'required',
+            'kategoris' => 'required',
+            'deskripsi' => 'required',
+            'harga' => 'required',
+            'komposisi' => 'required',
+            'karbo' => 'required',
+            'protein' => 'required',
+            'kalori' => 'required',
+            'serat' => 'required',
+        ]);
+
         $produk = Produk::findOrFail($id);
 
-        if ($produk->gambar && file_exists(storage_path('app/public/' . $produk->gambar))) {
-            Storage::delete('public/' . $produk->gambar);
-        }
-        $gambar = $request->file('gambar')->store('images', 'public');
-        $produk->gambar = $gambar;
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($produk->gambar && file_exists(storage_path('app/public/' . $produk->gambar))) {
+                Storage::delete('public/' . $produk->gambar);
+            }
+        
+            // Simpan gambar baru
+            $gambar = $request->file('gambar')->store('images', 'public');
+            $produk->gambar = $gambar;
+        } 
 
         $produk->nama = $request->get('nama');
         $produk->deskripsi = $request->get('deskripsi');
@@ -105,7 +138,7 @@ class AdminProdukController extends Controller
         $kategoris = $request->get('kategoris');
         $produk->kategori()->sync($kategoris);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Produk telah diupdate');;
     }
 
     /**
@@ -121,6 +154,20 @@ class AdminProdukController extends Controller
         // Delete the produk
         $produk->delete();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Produk telah dihapus');
+    }
+
+    public function hidden($id){
+        $produk = Produk::findOrFail($id);
+        $produk->hidden = "yes";
+        $produk->save();
+        return redirect()->route('product.index')->with('success', 'Berhasil merubah produk');
+    }
+
+    public function visible($id){
+        $produk = Produk::findOrFail($id);
+        $produk->hidden = "no";
+        $produk->save();
+        return redirect()->route('product.index')->with('success', 'Berhasil merubah produk');
     }
 }

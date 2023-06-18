@@ -1,10 +1,16 @@
 <x-home-layout>
-    <div class="flex justify-center w-full bg-kuning min-h-screen h-max">
-        <div class="flex flex-col mt-24">
+    <div class="grid sticky top-[100px] justify-items-center z-50">
+        <div class="absolute">
+            @include('toast.toast')
+        </div>
+    </div>
+    <div class="flex flex-col justify-center w-full bg-kuning min-h-screen h-max">
+        <div class="flex flex-col mt-24 mx-auto">
             <h1 class="font-bebas text-white text-[70px] tracking-[.20em] mx-auto">Pilihan Makanan Sehat</h1>
             <h3 class="font-bebas text-oranyet text-[40px] tracking-[.20em] mx-auto">Healthy Lifestyle Meal Plan</h3>
             <div class="grid grid-cols-4 gap-x-10 gap-y-10 my-20">
                 @foreach($produk as $Produk)
+                @if($Produk->hidden=="no")
                 <div class="bg-gray-100 w-fit h-fit hover:bg-gray-200 shadow-lg rounded-2xl duration-500 hover:scale-105 hover:shadow-2xl">
                     <a href="{{route('detail', ['nama' => $Produk->nama])}}" class="mt-6">
                         <img src="{{asset('storage/'. $Produk->gambar)}}" alt="produk" class="object-cover h-[240px] w-[300px] rounded-t-2xl">
@@ -28,6 +34,8 @@
                         </div>
                     </a>
                 </div>
+                @else
+                @endif
                 @endforeach
             </div>
         </div>

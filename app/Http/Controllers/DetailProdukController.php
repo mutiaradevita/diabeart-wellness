@@ -15,7 +15,9 @@ class DetailProdukController extends Controller
         $detail = Produk::where('nama', $nama)->first();
         $idproduk = $detail->id;
         $ulasan = Ulasan::where('id_produk', $idproduk)->orderBy('id', 'desc')->get();
-        return view('detail', compact('detail', 'ulasan'));
+        $creview = $ulasan->count();
+        $avgrating = number_format($ulasan->avg('rating'), 2);
+        return view('detail', compact('detail', 'ulasan', 'creview', 'avgrating'));
     }
 
     public function create(Request $request, $harga, $idproduk)
@@ -23,6 +25,7 @@ class DetailProdukController extends Controller
         $iduser = Auth::user()->id;
         $jumlah = $request->get('jumlah');
         $status = $request->get('status');
+        $ulasan = $request->get('ulasan');
         $catatan = $request->get('catatan');
 
         $keranjang = new Keranjang;
@@ -35,9 +38,10 @@ class DetailProdukController extends Controller
             $keranjang->catatan = $catatan;
         }
         $keranjang->status = $status;
+        $keranjang->ulasan = $ulasan;
         $keranjang->id_produk = $idproduk;
         $keranjang->id_users = $iduser;
         $keranjang->save();
-        return redirect()->route('produk');
+        return redirect()->route('produk')->with('success', 'Produk dimasukkan ke Keranjang');
     }
 }

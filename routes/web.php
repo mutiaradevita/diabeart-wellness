@@ -34,7 +34,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth', 'admin')->prefix('dashboard')->group(function () {
+Route::middleware('auth', 'admin')->group(function () {
     Route::middleware('auth', 'admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard.user');
@@ -44,8 +44,10 @@ Route::middleware('auth', 'admin')->prefix('dashboard')->group(function () {
         Route::get('/dashboard/review/detail/{id}', [AdminReviewController::class, 'show'])->name('dashboard.review.detail');
         Route::resource('/dashboard/user', AdminUserController::class);
         Route::resource('/dashboard/review', AdminReviewController::class);
-        Route::resource('kategori', AdminKategoriController::class);
+        Route::resource('/dashboard/kategori', AdminKategoriController::class);
         Route::resource('dashboard/product', AdminProdukController::class);
+        Route::put('dashboard/product/hidden/{id}', [AdminProdukController::class, 'hidden'])->name('dashboard.product.hidden');
+        Route::put('dashboard/product/visible/{id}', [AdminProdukController::class, 'visible'])->name('dashboard.product.visible');
         Route::get('/dashboard/transaksi', [AdminTransaksiController::class, 'index'])->name('dashboard.transaksi');
         Route::get('/dashboard/transaksi/keranjang', [AdminTransaksiController::class, 'readKeranjang'])->name('dashboard.transaksi.keranjang');
         Route::put('/dashboard/transaksi/{id}', [AdminTransaksiController::class, 'update'])->name('dashboard.transaksi.update');
@@ -72,7 +74,7 @@ Route::post('/produk/create/{harga}/{idproduk}', [DetailProdukController::class,
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 
 Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan');
-Route::post('/ulasan/create/{idproduk}', [UlasanController::class, 'create'])->name('ulasan.create');
+Route::post('/ulasan/create/{idproduk}/{idkeranjang}', [UlasanController::class, 'create'])->name('ulasan.create');
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 

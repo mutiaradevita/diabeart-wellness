@@ -3,19 +3,18 @@
 @section('title', 'Admin')
 
 @section('main-content')
-
+<div class="grid sticky top-[100px] justify-items-center z-50">
+    <div class="absolute">
+        @include('toast.toast')
+    </div>
+</div>
 <div class="p-4 border-1 rounded-lg mt-14 bg-white">
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <form action="{{route('product.index')}}" method="get">
             <div class="flex flex-row pb-4 bg-white">
                 <label for="table-search" class="sr-only">Search</label>
                 <div class="relative mt-1">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <input type="text" id="table-search" name="search" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
+                    <input type="text" id="table-search" name="search" class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Masukkan nama produk">
                 </div>
                 <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -25,7 +24,7 @@
                 </button>
             </div>
             <div class="py-2">
-                <button data-modal-target="authentication-modal1" data-modal-toggle="authentication-modal1" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900 justify-content-end" type="button">
+                <button data-modal-target="authentication-modal1" data-modal-toggle="authentication-modal1" class="focus:outline-none text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 justify-content-end" type="button">
                     Add Produk
                 </button>
             </div>
@@ -39,10 +38,13 @@
                     <th scope="col" class="px-6 py-3">
                         Nama Produk
                     </th>
-                    <th scope="col" class="px-6 py-3 columns-xl">
+                    <th scope="col" class="px-6 py-3">
                         Gambar
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        kategori
+                    </th>
+                    <th scope="col" class="px-12 py-3">
                         Deskripsi
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -51,19 +53,22 @@
                     <th scope="col" class="px-6 py-3">
                         Komposisi
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-2 py-3">
                         Karbo
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-2 py-3">
                         Protein
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-2 py-3">
                         Kalori
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-2 py-3">
                         Serat
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-2 py-3">
+                        Hidden
+                    </th>
+                    <th scope="col" class="px-2 py-3">
                         Action
                     </th>
                 </tr>
@@ -81,6 +86,11 @@
                         <img src="{{asset('storage/'. $produk->gambar)}}" alt="gambar" class="w-[80px]">
                     </td>
                     <td class="px-6 py-4">
+                        @foreach($produk->Kategori as $ktg)
+                        {{ $ktg->nama_kategori }}
+                        @endforeach
+                    </td>
+                    <td class="px-6 py-4">
                         {{ $produk->deskripsi }}
                     </td>
                     <td class="px-6 py-4">
@@ -89,20 +99,23 @@
                     <td class="px-6 py-4">
                         {{ $produk->komposisi }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-2 py-4">
                         {{ $produk->karbo }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-2 py-4">
                         {{ $produk->protein }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-2 py-4">
                         {{ $produk->kalori }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-2 py-4">
                         {{ $produk->serat }}
                     </td>
+                    <td class="px-2 py-4">
+                        {{ $produk->hidden ?? 'Belum diset' }}
+                    </td>
                     <td class="px-6 py-4">
-                        <button data-modal-target="authentication-modal{{$produk->id}}" data-modal-toggle="authentication-modal{{$produk->id}}" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900 justify-content-end w-[80px]" type="button">
+                        <button data-modal-target="authentication-modal{{$produk->id}}" data-modal-toggle="authentication-modal{{$produk->id}}" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900 justify-content-end w-[80px]" type="button">
                             Edit
                         </button>
                         <div id="authentication-modal{{$produk->id}}" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -141,11 +154,11 @@
                                         </div>
                                         <div>
                                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="deskripsi">Deskripsi</label>
-                                            <input type="text" name="deskripsi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Deskripsi" value="{{$produk->deskripsi}}">
+                                            <textarea name="deskripsi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Deskripsi">{{$produk->deskripsi}}</textarea>
                                         </div>
                                         <div>
                                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="harga">Harga</label>
-                                            <input type="text" name="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Harga" value="{{$produk->harga}}">
+                                            <input type="number" name="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Harga" value="{{$produk->harga}}">
                                         </div>
                                         <div>
                                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="komposisi">Komposisi</label>
@@ -153,19 +166,19 @@
                                         </div>
                                         <div>
                                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="karbo">Karbo</label>
-                                            <input type="text" name="karbo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Karbo" value="{{$produk->karbo}}">
+                                            <input type="text" name="karbo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-[100px] p-2.5 mb-4" placeholder="Karbo" value="{{$produk->karbo}}">
                                         </div>
                                         <div>
                                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="protein">Protein</label>
-                                            <input type="text" name="protein" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Protein" value="{{$produk->protein}}">
+                                            <input type="text" name="protein" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-[100px] p-2.5 mb-4" placeholder="Protein" value="{{$produk->protein}}">
                                         </div>
                                         <div>
                                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="kalori">Kalori</label>
-                                            <input type="text" name="kalori" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Kalori" value="{{$produk->kalori}}">
+                                            <input type="text" name="kalori" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-[100px] p-2.5 mb-4" placeholder="Kalori" value="{{$produk->kalori}}">
                                         </div>
                                         <div>
                                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="serat">Serat</label>
-                                            <input type="text" name="serat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Serat" value="{{$produk->serat}}">
+                                            <input type="text" name="serat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-[100px] p-2.5 mb-4" placeholder="Serat" value="{{$produk->serat}}">
                                         </div>
                                         <button type="submit" class="w-full text-white bg-oranye hover:bg-oranyet focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" data-modal-hide="authentication-modal{{$produk->id}}">Simpan</button>
                                     </div>
@@ -173,12 +186,51 @@
                             </form>
                         </div>
                         <form method="POST" action="{{ route('product.destroy', $produk->id) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900 justify-content-end w-[80px]" type="submit">
+                            <button data-modal-target="popup-modal{{$produk->id}}" data-modal-toggle="popup-modal{{$produk->id}}" class="focus:outline-none text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 justify-content-end w-[80px]" type="button">
                                 Delete
                             </button>
+                            @csrf
+                            @method('DELETE')
+                            <div id="popup-modal{{$produk->id}}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                <div class="relative w-full max-w-md max-h-full">
+                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="popup-modal{{$produk->id}}">
+                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span class="sr-only">Close modal</span>
+                                        </button>
+                                        <div class="p-6 text-center">
+                                            <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda yakin ingin menghapus produk {{$produk->nama}}?</h3>
+                                            <button type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                                Ya
+                                            </button>
+                                            <button data-modal-hide="popup-modal{{$produk->id}}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Tidak</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
+                        @if($produk->hidden=="no")
+                        <form action="{{ route('dashboard.product.hidden', $produk->id) }}" method="post">
+                            @csrf
+                            @method('PUT')
+                            <button class="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm py-2.5 mr-2 mb-2 justify-content-end w-[80px]" type="submit">
+                                Hidden
+                            </button>
+                        </form>
+                        @else
+                        <form action="{{ route('dashboard.product.visible', $produk->id) }}" method="post">
+                            @csrf
+                            @method('PUT')
+                            <button class="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm py-2.5 mr-2 mb-2 justify-content-end w-[80px]" type="submit">
+                                Visible
+                            </button>
+                        </form>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
@@ -223,11 +275,11 @@
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="deskripsi">Deskripsi</label>
-                    <input type="text" name="deskripsi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Deskripsi">
+                    <textarea name="deskripsi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Deskripsi"></textarea>
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="harga">Harga</label>
-                    <input type="text" name="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Harga">
+                    <input type="number" name="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Harga">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="komposisi">Komposisi</label>
@@ -235,19 +287,19 @@
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="karbo">Karbo</label>
-                    <input type="text" name="karbo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Karbo">
+                    <input type="text" name="karbo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-[100px] p-2.5 mb-4" placeholder="Karbo">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="protein">Protein</label>
-                    <input type="text" name="protein" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Protein">
+                    <input type="text" name="protein" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-[100px] p-2.5 mb-4" placeholder="Protein">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="kalori">Kalori</label>
-                    <input type="text" name="kalori" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Kalori">
+                    <input type="text" name="kalori" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-[100px] p-2.5 mb-4" placeholder="Kalori">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="serat">Serat</label>
-                    <input type="text" name="serat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-full p-2.5 mb-4" placeholder="Serat">
+                    <input type="text" name="serat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-oranye focus:border-oranye block w-[100px] p-2.5 mb-4" placeholder="Serat">
                 </div>
                 <button type="submit" class="w-full text-white bg-oranye hover:bg-oranyet focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" data-modal-hide="authentication-modal1">Simpan</button>
             </div>
