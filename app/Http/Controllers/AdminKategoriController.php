@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use App\Models\Kategori_Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminKategoriController extends Controller
 {
@@ -41,11 +42,15 @@ class AdminKategoriController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->file('gambar')) {
+            $gambar = $request->file('gambar')->store('kategori', 'public');
+        }
         $kategori = new Kategori;
+        
         $kategori->nama_kategori = $request->get('nama_kategori');
+        $kategori->gambar = $gambar;
         $kategori->save();
-        Kategori::create($request->all());
-        return redirect()->route('kategori')
+        return redirect()->route('kategori.index')
          ->with('success', 'Kategori Berhasil Ditambahkan');
     }
 
@@ -54,9 +59,11 @@ class AdminKategoriController extends Controller
      */
     public function show(string $id)
     {
-        ///menampilkan detail data dengan menemukan/berdasarkan Nim Mahasiswa
-        $produk = Kategori_Produk::where('produk',$id);
-        return view('kategori.show', compact('produk'));
+        ///menampilkan detail data dengan menemukan/berdasarkan Nim Mahasiswa;
+        $kategori = Kategori::findOrFail($id);
+        $produk = $kategori->produk;
+
+        return view('kategori.show', compact('kategori', 'produk'));
     }
 
     /**
@@ -74,16 +81,18 @@ class AdminKategoriController extends Controller
      */
     public function update(Request $request, string $id)
     {
-            //melakukan validasi data
-            $request->validate([
-            'id' => 'required',
-            'nama_kategori' => 'required',
-            ]);
-            //fungsi eloquent untuk mengupdate data inputan kita
-            Kategori::find($id)->update($request->all());
-            //jika data berhasil diupdate, akan kembali ke halaman utama
+        $kategori = Kategori::findOrFail($id);
+
+        if ($request->file('gambar')) {
+            $gambar = $request->file('gambar')->store('kategori', 'public');
+        }
+        //melakukan validasi data
+            $kategori->nama_kategori = $request->get('nama_kategori');
+            $kategori->gambar = $gambar;
+            $kategori->save();
+        //jika data berhasil diupdate, akan kembali ke halaman utama
             return redirect()->route('kategori.index')
-              ->with('success', 'Kategori Berhasil Diupdate');
+            ->with('success', 'Kategori Berhasil Diupdate');
     }
 
     /**
