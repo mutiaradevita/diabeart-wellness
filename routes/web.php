@@ -35,22 +35,23 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth', 'admin')->group(function () {
-    Route::middleware('auth', 'admin')->group(function () {
-        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-        Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard.user');
-        Route::get('/dashboard/product', [AdminController::class, 'product'])->name('dashboard.product');
-        Route::get('/dashboard/review', [AdminReviewController::class, 'index'])->name('dashboard.review');
-        Route::put('/dashboard/review/{id}', [AdminReviewController::class, 'update'])->name('dashboard.review.update');
-        Route::get('/dashboard/review/detail/{id}', [AdminReviewController::class, 'show'])->name('dashboard.review.detail');
-        Route::resource('/dashboard/user', AdminUserController::class);
-        Route::resource('/dashboard/review', AdminReviewController::class);
-        Route::resource('/dashboard/kategori', AdminKategoriController::class);
-        Route::resource('dashboard/product', AdminProdukController::class);
-        Route::get('/dashboard/transaksi', [AdminTransaksiController::class, 'index'])->name('dashboard.transaksi');
-        Route::get('/dashboard/transaksi/keranjang', [AdminTransaksiController::class, 'readKeranjang'])->name('dashboard.transaksi.keranjang');
-        Route::put('/dashboard/transaksi/{id}', [AdminTransaksiController::class, 'update'])->name('dashboard.transaksi.update');
-        Route::get('/dashboard/transaksi/cetakLaporan', [AdminTransaksiController::class, 'cetak'])->name('dashboard.transaksi.cetak');
-    });
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard.user');
+    Route::get('/dashboard/product', [AdminController::class, 'product'])->name('dashboard.product');
+    Route::get('/dashboard/review', [AdminReviewController::class, 'index'])->name('dashboard.review');
+    Route::put('/dashboard/review/{id}', [AdminReviewController::class, 'update'])->name('dashboard.review.update');
+    Route::get('/dashboard/review/detail/{id}', [AdminReviewController::class, 'show'])->name('dashboard.review.detail');
+    Route::resource('/dashboard/user', AdminUserController::class);
+    Route::resource('/dashboard/review', AdminReviewController::class);
+    Route::resource('dashboard/product', AdminProdukController::class);
+    Route::get('/dashboard/transaksi', [AdminTransaksiController::class, 'index'])->name('dashboard.transaksi');
+    Route::get('/dashboard/transaksi/keranjang', [AdminTransaksiController::class, 'readKeranjang'])->name('dashboard.transaksi.keranjang');
+    Route::put('/dashboard/transaksi/{id}', [AdminTransaksiController::class, 'update'])->name('dashboard.transaksi.update');
+    Route::get('/dashboard/transaksi/cetakLaporan', [AdminTransaksiController::class, 'cetak'])->name('dashboard.transaksi.cetak');
+});
+
+Route::middleware('auth', 'admin')->prefix('dashboard')->group(function () {
+    Route::resource('kategori', AdminKategoriController::class);
 });
 
 Route::middleware('auth')->group(function () {
