@@ -3,7 +3,11 @@
 @section('title', 'Admin')
 
 @section('main-content')
-
+<div class="grid sticky top-[100px] justify-items-center z-50">
+    <div class="absolute">
+        @include('toast.toast')
+    </div>
+</div>
     <div class="p-4 border-1 rounded-lg mt-14 bg-white">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div class="flex pb-4 bg-white dark:bg-gray-900">
@@ -92,15 +96,61 @@
                                     {{ $ulasans->id_produk }}
                             </td>
                             <td class="px-6 py-4">
-                                <form method="POST" action="{{ route('dashboard.review.update', $ulasans->id) }}">
+                                <form method="POST" action="{{ route('review.update', $ulasans->id) }}">
                                     @method('PUT')
                                     @csrf
                                     <input type="hidden" name="komentar" value="Berdasarkan kebijakan layanan kami, komentar ini disembunyikan karena berpotensi atau mengandung kata yang menyinggung, tidak sopan, dan/ hal-hal kurang pantas lainnya. (mohon untuk menuliskan ulasan anda secara bijak - Tim Diabeart Wellness) ">
-                                        <a class="font-medium text-white dark:white"><button type="submit" class="bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2.5 py-2 mr-2 mb-2 dark:focus:ring-yellow-900 justify-content-end">Hide Comment</button></a>
+                                        <a class="font-medium text-white dark:white">
+                                            <button type="submit" class="bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2.5 py-2 mr-2 mb-2 dark:focus:ring-yellow-900 justify-content-end">
+                                                Hide Comment
+                                            </button>
+                                        </a>
                                 </form>
-                                <form method="GET" action="{{ route('dashboard.review.detail', $ulasans->id) }}">
-                                    <button type="submit" class="text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-10 py-2 mr-2 mb-2 dark:focus:ring-green-900 justify-content-end">Detail</button>
-                                </form>
+
+                                <button id="showReviewButton" data-modal-toggle="showReviewModal{{ $ulasans->id }}" class="block text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-10 py-2 mr-2 mb-2 dark:focus:ring-green-900 justify-content-end" type="button">
+                                    Detail
+                                </button>
+                                <!-- Modal body -->
+                                <div id="showReviewModal{{ $ulasans->id }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+                                    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                                        <!-- Modal content -->
+                                        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                                            <!-- Modal header -->
+                                            <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+                                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    Review Details
+                                                </h3>
+                                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="showReviewModal{{ $ulasans->id }}">
+                                                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                                    </svg>
+                                                    <span class="sr-only">Close modal</span>
+                                                </button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="flex">
+                                                <div class="w-1/2 pr-4">
+                                                    <label for="idUlasan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Ulasan</label>
+                                                    <p>{{ $ulasans->id }}</p> <br>
+                                                    <label for="idProduk" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID Produk</label>
+                                                    <p>{{ $ulasans->id_produk }}</p> <br>
+                                                    <label for="rating" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rating</label>
+                                                    <p>{{ $ulasans->rating }}</p> <br>
+                                                    <label for="komentar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Komentar</label>
+                                                    <p>{{ $ulasans->komentar }}</p> <br>
+                                                    <label for="idUser" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID User</label>
+                                                    <p>{{ $ulasans->id_users }}</p> <br>
+                                                    <label for="namaUser" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama User</label>
+                                                    <p>{{ $ulasans->user->name }}</p> <br>
+                                                </div>
+                                                <div class="w-1/2 pl-4">
+                                                    <h4 class="text-lg font-semibold text-black dark:text-white">{{ $produk->nama }}</h4>
+                                                    <img class="w-full h-auto mt-4" src="{{ asset('storage/'.$produk->gambar) }}" alt="Gambar Produk">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
