@@ -35,7 +35,7 @@
                     <x-slot name="trigger">
                         <button class="inline-flex items-center border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             @if(Auth::user()->image_user)
-                            <img class="w-10 rounded-full" src="{{Auth::user()->image_user}}" alt="">
+                            <img class="w-10 h-10 rounded-full object-cover" src="{{ asset('storage/' . Auth::user()->image_user)}}" alt="">
                             @else
                             <img class="w-10 rounded-full" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="">
                             @endif
