@@ -31,7 +31,7 @@ class AdminReviewController extends Controller
         $ulasan->komentar = $request->get('komentar');
         $ulasan->save();
 
-        return redirect()->route('dashboard.review');
+        return redirect()->route('review.index');
     }
 
     public function show($id)
