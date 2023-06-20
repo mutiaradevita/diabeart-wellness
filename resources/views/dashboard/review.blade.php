@@ -144,7 +144,7 @@
                                             <label for="idUser" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID User</label>
                                             <p>{{ $ulasans->id_users }}</p> <br>
                                             <label for="namaUser" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama User</label>
-                                            <p>{{ $ulasans->user->name }}</p> <br>
+                                            <p>{{ $ulasans->user->name ?? 'User Telah Dihapus' }}</p> <br>
                                     </div>
                                     <div class="w-1/2 pl-4">
                                         <h4 class="text-lg font-semibold text-black dark:text-white">{{ $produk->nama }}</h4>

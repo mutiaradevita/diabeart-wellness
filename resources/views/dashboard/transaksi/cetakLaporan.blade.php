@@ -78,8 +78,8 @@
                         <td>{{ $item->tanggal }}</td>
                         <td>Rp {{ $item->total }}</td>
                         <td>{{ $item->metode_pembayaran }}</td>
-                        <td>{{ $item->user->name }}</td>
-                        <td>{{ $item->user->alamat }}</td>
+                        <td>{{ $item->user->name ?? 'User Telah Dihapus' }}</td>
+                        <td>{{ $item->alamat }}</td>
                         <td>{{ $item->status }}</td>
                         <td>
                             @foreach ($item->keranjang as $items)

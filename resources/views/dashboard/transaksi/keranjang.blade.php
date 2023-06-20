@@ -66,7 +66,7 @@
                                 {{ $item->status }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $item->user->name }}
+                                {{ $item->user->name ?? 'User Telah Dihapus' }}
                             </td>
                         </tr>
                     @endforeach
