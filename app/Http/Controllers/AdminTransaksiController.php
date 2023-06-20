@@ -28,6 +28,11 @@ class AdminTransaksiController extends Controller
     }
 
     public function update(Request $request, $id){
+
+        $request->validate([
+            'status' => 'required',
+        ]);
+
         $transaksi = Transaksi::find($id);
         $transaksi->status = $request->get('status');
         $transaksi->save();
