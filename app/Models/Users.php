@@ -25,14 +25,14 @@ class Users extends Model
     ];
 
     public function keranjang(){
-        return $this->hasMany(Keranjang::class);
+        return $this->hasMany(Keranjang::class, 'id_users');
     }
     
     public function ulasan(){
-        return $this->hasMany(Ulasan::class);
+        return $this->hasMany(Ulasan::class, 'id_users');
     }
 
     public function transaksi(){
-        return $this->hasMany(Transaksi::class);
+        return $this->hasMany(Transaksi::class, 'id_users');
     }
 }

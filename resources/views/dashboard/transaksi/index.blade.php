@@ -77,7 +77,7 @@
                                 {{ $item->metode_pembayaran }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $item->user->name }}
+                                {{ $item->user->name ?? 'Akun Telah Dihapus' }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $item->alamat }}
