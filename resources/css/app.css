@@ -12,6 +12,11 @@
   animation-delay: 2s; 
 }
 
+#toast-danger {
+  animation: slide-up 1s ease-in-out forwards;
+  animation-delay: 2s; 
+}
+
 @keyframes slide-up {
   80% {
     transform: translateY(0);
