@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
-use App\Models\Kategori_Produk;
 use Illuminate\Http\Request;
+use App\Models\Kategori_Produk;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
+
 
 class AdminKategoriController extends Controller
 {
@@ -52,7 +54,7 @@ class AdminKategoriController extends Controller
             $gambar = $request->file('gambar')->store('kategori', 'public');
         }
         $kategori = new Kategori;
-        
+
         $kategori->nama_kategori = $request->get('nama_kategori');
         $kategori->gambar = $gambar;
         $kategori->save();
