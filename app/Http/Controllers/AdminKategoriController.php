@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
-use App\Models\Kategori_Produk;
 use Illuminate\Http\Request;
+use App\Models\Kategori_Produk;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
+
 
 class AdminKategoriController extends Controller
 {
@@ -46,7 +48,7 @@ class AdminKategoriController extends Controller
             $gambar = $request->file('gambar')->store('kategori', 'public');
         }
         $kategori = new Kategori;
-        
+
         $kategori->nama_kategori = $request->get('nama_kategori');
         $kategori->gambar = $gambar;
         $kategori->save();
@@ -83,12 +85,16 @@ class AdminKategoriController extends Controller
     {
         $kategori = Kategori::findOrFail($id);
 
-        if ($request->file('gambar')) {
-            $gambar = $request->file('gambar')->store('kategori', 'public');
+        if ($request->hasFile('gambar')) {
+
+        if ($kategori->gambar && file_exists(storage_path('app/public/'.$kategori->gambar))) {
+            Storage::delete('public/'.$kategori->gambar);
+        }
+            $gambar = $request->file('gambar')->store('images', 'public');
+            $kategori->gambar = $gambar;
         }
         //melakukan validasi data
             $kategori->nama_kategori = $request->get('nama_kategori');
-            $kategori->gambar = $gambar;
             $kategori->save();
         //jika data berhasil diupdate, akan kembali ke halaman utama
             return redirect()->route('kategori.index')
