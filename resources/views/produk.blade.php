@@ -15,9 +15,14 @@
                     <a href="{{route('detail', ['nama' => $Produk->nama])}}" class="mt-6">
                         <img src="{{asset('storage/'. $Produk->gambar)}}" alt="produk" class="object-cover h-[240px] w-[300px] rounded-t-2xl">
                         <div class="px-6 py-3">
+                            @if($Produk->kategori->isEmpty())
+                            <span class="text-gray-400 text-xs">Tidak ada kategori</span> 
+                            @else
                             @foreach($Produk->kategori as $p)
-                            <span class="text-gray-400 text-xs">{{$p->nama_kategori ?? 'None'}} </span>
+                            <span class="text-gray-400 text-xs">{{$p->nama_kategori ?? 'None'}} </span>                                 
                             @endforeach
+                            @endif
+                            
                             <p class="text-lg font-bold text-black truncate block capitalize">{{$Produk->nama}}</p>
                             <div class="flex items-center">
                                 <p class="text-lg font-semibold text-black cursor-auto my-3">Rp {{$Produk->harga}}</p>

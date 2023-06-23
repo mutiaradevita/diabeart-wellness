@@ -43,7 +43,6 @@ class AdminProdukController extends Controller
 
         $request->validate([
             'nama' => 'required',
-            'kategoris' => 'required',
             'gambar' => 'required',
             'deskripsi' => 'required',
             'harga' => 'required',
@@ -102,7 +101,6 @@ class AdminProdukController extends Controller
 
         $request->validate([
             'nama' => 'required',
-            'kategoris' => 'required',
             'deskripsi' => 'required',
             'harga' => 'required',
             'komposisi' => 'required',
