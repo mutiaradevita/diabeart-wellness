@@ -146,15 +146,14 @@ class AdminProdukController extends Controller
      */
     public function destroy($id)
     {
-        $produk = Produk::findOrFail($id);
-
-        // Detach all kategori
-        $produk->kategori()->detach();
-
-        // Delete the produk
-        $produk->delete();
-
-        return redirect()->route('product.index')->with('success', 'Produk telah dihapus');
+        try {
+            $produk = Produk::findOrFail($id);
+            $produk->kategori()->detach();
+            $produk->delete();
+            return redirect()->route('product.index')->with('success', 'Produk telah dihapus');
+        } catch (\Exception $e) {
+            return redirect()->route('product.index')->with('error', 'Gagal, produk berkaitan dengan suatu Keranjang');
+        }
     }
 
     public function hidden($id){

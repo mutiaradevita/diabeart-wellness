@@ -31,14 +31,12 @@ class AdminReviewController extends Controller
         $ulasan->komentar = $request->get('komentar');
         $ulasan->save();
 
-        return redirect()->route('dashboard.review');
+        return redirect()->route('review.index')->with('success', 'Komentar berhasil disembunyikan');
     }
 
     public function show($id)
     {
-        $ulasan = Ulasan::find($id);
-
-        return view('dashboard.review_detail', compact('ulasan'));
+        //
     }
 
 }

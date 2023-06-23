@@ -13,17 +13,47 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
         <div>
             <x-input-label for="image_user" :value="__('Profile Photo')" />
             <input id="image_user" name="image_user" type="file" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-            :value="old('image_user', $user->image_user)" required autofocus autocomplete="image_user">
+            :value="old('image_user', $user->image_user)" required autofocus autocomplete="image_user" onchange="previewImage(event)">
             <x-input-error class="mt-2" :messages="$errors->get('image_user')" />
         </div>
-        
+
+        <div id="imagePreview" class="mt-4">
+            @if ($user->image_user)
+                <img src="{{asset('storage/'. $user->image_user)}}" alt="User Image" class="max-w-xs">
+            @endif
+        </div>
+
+        <script>
+            function previewImage(event) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function() {
+                const preview = document.getElementById('imagePreview');
+                const img = document.createElement('img');
+                img.src = reader.result;
+                img.alt = 'Preview Image';
+                img.classList.add('max-w-xs');
+                preview.innerHTML = '';
+                preview.appendChild(img);
+                };
+
+                if (file) {
+                reader.readAsDataURL(file);
+                } else {
+                const preview = document.getElementById('imagePreview');
+                preview.innerHTML = '<img src="{{ asset($user->image_user) }}" alt="User Image" class="max-w-xs">';
+                }
+            }
+        </script>
+
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />

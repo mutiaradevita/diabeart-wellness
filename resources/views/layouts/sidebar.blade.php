@@ -13,40 +13,47 @@
                  <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
               </svg>
            </button>
-          <a href="https://flowbite.com" class="flex ml-2 md:mr-24">
-            <img src="{{asset('img/logo.png')}}" class="h-8 mr-3" alt="FlowBite Logo" />
-            <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Diabert Wellness</span>
+          <a href="dashboard" class="flex ml-2 md:mr-24">
+            <img src="{{asset('img/logo.png')}}" class="h-14 mr-3" alt="FlowBite Logo" />
+            <span class="self-center text-xl font-semibold sm:text-1xl whitespace-nowrap dark:text-white">Diabeart Wellness</span>
           </a>
         </div>
+
+        <!-- profile photo -->
         <div class="flex items-center">
             <div class="flex items-center ml-3">
-              <div>
-                <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                  <span class="sr-only">Open user menu</span>
-                  <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
-                </button>
-              </div>
-              <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
-                <div class="px-4 py-3" role="none">
-                  <p class="text-sm text-gray-900 dark:text-white" role="none">
-                    {{ Auth::user()->name }}
-                  </p>
-                  <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                    {{ Auth::user()->email }}
-                  </p>
-                </div>
-                <ul class="py-1" role="none">
-                  <li>
-                    <a href="{{route('profile.edit')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Profile</a>
-                  </li>
-                  <li>
-                    <form action="{{route('logout')}}" method="POST">
-                        @csrf
-                      <a href="{{route('logout')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" onclick="event.preventDefault(); this.closest('form').submit();" >Sign out</a>
-                     </form>
-                  </li>
-                </ul>
-              </div>
+            @if (Auth::check())
+                <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                        <button class="inline-flex items-center border border-transparent text-sm leading-4 font-medium rounded-full text-gray-500 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            @if(Auth::user()->image_user)
+                            <img class="w-10 h-10 rounded-full object-cover" src="{{ asset('storage/' . Auth::user()->image_user)}}" alt="">
+                            @else
+                            <img class="w-10 rounded-full" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="">
+                            @endif
+                        </button>
+                    </x-slot>
+
+                    <x-slot name="content">
+                        <div class="px-4 py-3">
+                            <span class="block text-sm text-gray-900 dark:text-white">{{Auth::user()->name}}</span>
+                            <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{Auth::user()->email}}</span>
+                        </div>
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                    </x-slot>
+                </x-dropdown>
+                @endif
             </div>
           </div>
       </div>

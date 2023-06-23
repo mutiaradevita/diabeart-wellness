@@ -44,6 +44,12 @@ class AdminKategoriController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'gambar' => 'required',
+            'nama_kategori' => 'required',
+        ]);
+
         if ($request->file('gambar')) {
             $gambar = $request->file('gambar')->store('kategori', 'public');
         }
@@ -83,14 +89,21 @@ class AdminKategoriController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $request->validate([
+            'nama_kategori' => 'required',
+        ]);
+
         $kategori = Kategori::findOrFail($id);
 
-        if ($request->hasFile('gambar')) {
+        if ($request->file('gambar')) {
 
-        if ($kategori->gambar && file_exists(storage_path('app/public/'.$kategori->gambar))) {
-            Storage::delete('public/'.$kategori->gambar);
-        }
-            $gambar = $request->file('gambar')->store('images', 'public');
+            if ($kategori->gambar && file_exists(storage_path('app/public/' . $kategori->gambar))) {
+                Storage::delete('public/' . $kategori->gambar);
+            }
+
+            $gambar = $request->file('gambar')->store('kategori', 'public');
+
             $kategori->gambar = $gambar;
         }
         //melakukan validasi data
@@ -106,7 +119,9 @@ class AdminKategoriController extends Controller
      */
     public function destroy($id)
     {
-        Kategori::find($id)->delete();
+        $kat = Kategori::find($id);
+        $kat->produk()->detach();
+        $kat->delete();
         return redirect()->route('kategori.index')
         -> with('success', 'Kategori Berhasil Dihapus');
     }

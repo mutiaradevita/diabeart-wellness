@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Users;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -39,6 +40,16 @@ class AdminUserController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'no_hp' => 'required',
+            'alamat' => 'required',
+            'password' => 'required|min:8',
+            'usertype' => 'required',
+        ]);
+
         $user = new User;
         $user->name = $request->get('name');
         $user->email = $request->get('email');
@@ -72,13 +83,21 @@ class AdminUserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'no_hp' => 'required',
+            'alamat' => 'required',
+            'usertype' => 'required',
+        ]);
+
         $user = User::findOrFail($id);
 
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->no_hp = $request->get('no_hp');
         $user->alamat = $request->get('alamat');
-        $user->password = Hash::make($request->password);
         $user->usertype = $request->get('usertype');
         $user->save();
         return redirect()->route('user.index');
@@ -90,7 +109,10 @@ class AdminUserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
+        $user = Users::findOrFail($id);
+        $user->keranjang()->update(['id_users' => null]);
+        $user->ulasan()->update(['id_users' => null]);
+        $user->transaksi()->update(['id_users' => null]);
         $user->delete();
 
         return redirect()->route('user.index');
