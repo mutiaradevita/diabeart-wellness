@@ -16,7 +16,11 @@
                         <img src="{{asset('storage/'. $Produk->gambar)}}" alt="produk" class="object-cover h-[240px] w-[300px] rounded-t-2xl">
                         <div class="px-6 py-3">
                             @foreach($Produk->kategori as $p)
+                            @if($p->isEmpty())
+                            <span class="text-gray-400 text-xs">Tidak ada kategori</span>
+                            @else
                             <span class="text-gray-400 text-xs">{{$p->nama_kategori ?? 'None'}} </span>
+                            @endif
                             @endforeach
                             <p class="text-lg font-bold text-black truncate block capitalize">{{$Produk->nama}}</p>
                             <div class="flex items-center">
