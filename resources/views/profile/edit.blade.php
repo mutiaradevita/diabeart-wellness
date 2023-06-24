@@ -1,8 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
+            <a href="{{ route('profile.edit') }}" class="hover:underline">
+                {{ __('Profile') }}
+            </a>
         </h2>
+
+        <div class="grid sticky top-[100px] justify-items-center z-50">
+            <div class="absolute">
+                @include('toast.toast')
+            </div>
+        </div>
     </x-slot>
 
     <div class="py-12">
