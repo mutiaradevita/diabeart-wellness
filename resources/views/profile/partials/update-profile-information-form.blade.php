@@ -20,7 +20,7 @@
         <div>
             <x-input-label for="image_user" :value="__('Profile Photo')" />
             <input id="image_user" name="image_user" type="file" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-            :value="old('image_user', $user->image_user)" required autofocus autocomplete="image_user" onchange="previewImage(event)">
+            :value="old('image_user', $user->image_user)"  autofocus autocomplete="image_user" onchange="previewImage(event)">
             <x-input-error class="mt-2" :messages="$errors->get('image_user')" />
         </div>
 
@@ -54,6 +54,12 @@
             }
         </script>
 
+        @if ($user->image_user)
+            <button name="delete_image" type="submit" class="block text-white bg-red-600 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 mr-2 mb-2 dark:focus:ring-red-900 justify-content-end" type="button" onclick="deleteProfilePhoto()">
+                Delete Profile Photo
+            </button>
+        @endif
+        
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
@@ -98,16 +104,6 @@
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
-            @endif
         </div>
     </form>
 </section>

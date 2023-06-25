@@ -34,15 +34,25 @@ class ProfileController extends Controller
         }
 
         // upload profile photo
-        if ($request->user()->image_user && file_exists(storage_path('app/public/' . $request->user()->image_user))) {
-            Storage::delete('public/' . $request->user()->image_user);
+        if ($request->hasFile('image_user')) {
+            if ($request->user()->image_user && file_exists(storage_path('app/public/' . $request->user()->image_user))) {
+                Storage::delete('public/' . $request->user()->image_user);
+            }
+            $image_user = $request->file('image_user')->store('images', 'public');
+            $request->user()->image_user = $image_user;
+        } else {
+            // hapus gambar profil jika tombol hapus diklik
+            if ($request->has('delete_image')) {
+                if ($request->user()->image_user && file_exists(storage_path('app/public/' . $request->user()->image_user))) {
+                    Storage::delete('public/' . $request->user()->image_user);
+                }
+                $request->user()->image_user = null;
+            }
         }
-        $image_user = $request->file('image_user')->store('images', 'public');
-        $request->user()->image_user = $image_user;
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit')->with('success', 'Profile Updated');
     }
 
     /**
@@ -57,7 +67,11 @@ class ProfileController extends Controller
         $user = $request->user();
 
         Auth::logout();
-
+        
+        $user = Users::findOrFail($id);
+        $user-> keranjang()->update(['ide_users' => null]);
+        $user-> ulasan()->update(['ide_users' => null]);
+        $user-> transaksi()->update(['ide_users' => null]);
         $user->delete();
 
         $request->session()->invalidate();
