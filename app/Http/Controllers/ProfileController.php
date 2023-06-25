@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Users;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,10 +69,10 @@ class ProfileController extends Controller
 
         Auth::logout();
         
-        $user = Users::findOrFail($id);
-        $user-> keranjang()->update(['ide_users' => null]);
-        $user-> ulasan()->update(['ide_users' => null]);
-        $user-> transaksi()->update(['ide_users' => null]);
+        // $user = Users::findOrFail($id);
+        $user->keranjang()->update(['id_users' => null]);
+        $user->ulasan()->update(['id_users' => null]);
+        $user->transaksi()->update(['id_users' => null]);
         $user->delete();
 
         $request->session()->invalidate();
