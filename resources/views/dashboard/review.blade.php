@@ -147,8 +147,8 @@
                                             <p>{{ $ulasans->user->name ?? 'User Telah Dihapus' }}</p> <br>
                                     </div>
                                     <div class="w-1/2 pl-4">
-                                        <h4 class="text-lg font-semibold text-black dark:text-white">{{ $produk->nama }}</h4>
-                                        <img class="w-full h-auto mt-4" src="{{ asset('storage/'.$produk->gambar) }}" alt="Gambar Produk">
+                                        <h4 class="text-lg font-semibold text-black dark:text-white">{{ $ulasans->produk->nama }}</h4>
+                                        <img class="w-full h-auto mt-4" src="{{ asset('storage/'.$ulasans->produk->gambar) }}" alt="Gambar Produk">
                                     </div>
                             </div>
                         </div>

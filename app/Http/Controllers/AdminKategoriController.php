@@ -46,17 +46,16 @@ class AdminKategoriController extends Controller
     {
 
         $request->validate([
-            'gambar' => 'required',
             'nama_kategori' => 'required',
         ]);
 
+        $kategori = new Kategori;
         if ($request->file('gambar')) {
             $gambar = $request->file('gambar')->store('kategori', 'public');
+            $kategori->gambar = $gambar;
         }
-        $kategori = new Kategori;
-
         $kategori->nama_kategori = $request->get('nama_kategori');
-        $kategori->gambar = $gambar;
+        
         $kategori->save();
         return redirect()->route('kategori.index')
          ->with('success', 'Kategori Berhasil Ditambahkan');
