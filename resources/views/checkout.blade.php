@@ -79,9 +79,9 @@ use Carbon\Carbon;
             <div class="flex">
                 <div class="pl-10 pr-10 pt-3">
                     <div class="grid pt-2 text-bold">
-                        <hr class="w-64 h-px my-8 bg-black border-0 dark:bg-white">
+                        <hr class="w-52 h-px my-8 bg-black border-0 dark:bg-white">
                         <a class="text-center">Rp {{$totalSemua + 6000}}</a>
-                        <hr class="w-64 h-px my-8 bg-black border-0 dark:bg-white">
+                        <hr class="w-52 h-px my-8 bg-black border-0 dark:bg-white">
                     </div>
                 </div>
             </div>

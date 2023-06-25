@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class KategoriSeeder extends Seeder
 {
@@ -13,12 +14,14 @@ class KategoriSeeder extends Seeder
     public function run(): void
     {
         $data=[[
-            'id'=>'7',
             'nama_kategori'=> 'Makanan',
+            'gambar' => null,
         ],
         [
-            'id'=>'8',
             'nama_kategori'=> 'Minuman',
+            'gambar' => null,
         ]];
+
+        DB::table('kategori')->insert($data);
     }
 }
