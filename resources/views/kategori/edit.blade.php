@@ -4,7 +4,7 @@
 
 @section('main-content')
 
-<div class="container mt-5">
+<div class="container mt-5 pt-4">
     <div class="row justify-content-center align-items-center">
         <div class="card" style="width: 24rem;">
             <div class="card-body">
@@ -24,6 +24,7 @@
                     <div class="card-header">
                         Edit Category
                     </div>
+                    <br>
                     <div class="form-group">
                         <label for="gambar">Gambar</label>
                         <input type="file" name="gambar" class="block p text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="gambar" value="{{ $kategori->gambar }}" ariadescribedby="gambar">
