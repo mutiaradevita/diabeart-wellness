@@ -1,6 +1,6 @@
 <x-home-layout>
     <div class="flex justify-center w-full bg-kuning min-h-screen h-max">
-        <div class="mt-24">
+        <div class="mt-24 mx-20">
             <h1 class="font-bebas text-white text-[50px] tracking-[.20em]">Product / {{$detail->nama ?? 'None'}}</h1>
             <hr class="h-2 bg-white">
             <div class="flex my-10">
